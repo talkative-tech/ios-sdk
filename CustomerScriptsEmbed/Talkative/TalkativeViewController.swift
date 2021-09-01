@@ -6,26 +6,43 @@ import WebKit
 /**
  Questions & Ideas
  
+ - as an user I want to give my credentials only once
+ - as an user I want to call simply startChat
  - why color is mandatory? it's better to have minimal effort to make SKD ready
  - webview could be private and not given users to access it in the closures
  - what error cases could we have? (for QosFail and/or connection )
- -
+ - it's better to put talkativeHelper to TalkativeVC so user can manage from there
+    |-> why do we need online checker at the end users intend is opening a chat right
+ so if there's any error it's one of the error if it's ready we can make it
+ optional to start the call
  
- 
+ -- Meeting Notes to questions
+ - companyId queueId region is mandatory
+ - user should be able to informed about call started async
+
  */
 
 struct TalkativeConfiguration {
-    var companyUuid: String!
-    var queueUuid: String!
-    var region: String = "eu"
-    var color: String = "255,0,0"
-    var type: CommunicationType = .chat
-    var interactionData: Array<InteractionDataEntry> = [InteractionDataEntry(label: "Name", data: "John", type: "string")]
-    var signedInteractionData: String = ""
-    var onReady: ((_: WKWebView) -> Void) = { (webview) in }
-    var onInteractionStart: ((_: WKWebView) -> Void) = { (webview) in }
-    var onQosFail: ((_: WKWebView) -> Void) = { (webview) in }
-    var onInteractionFinished: ((_: WKWebView) -> Void) = { (webview) in }
+    var companyId: String
+    var queueId: String
+    var region: String
+    var color: String
+    var type: CommunicationType
+    var interactionData: Array<InteractionDataEntry>
+    var signedInteractionData: String
+}
+
+extension TalkativeConfiguration {
+    static func defaultConfig(companyId: String, queueId: String) -> TalkativeConfiguration {
+        return TalkativeConfiguration(companyId: companyId,
+                                      queueId: queueId,
+                                      region: "eu",
+                                      color: "255,0,0",
+                                      type: .chat,
+                                      interactionData: [InteractionDataEntry(label: "Name", data: "John", type: "string")],
+                                      signedInteractionData: ""
+        )
+    }
 }
 
 enum QosFail: Error {
@@ -45,73 +62,98 @@ enum CommunicationType: String {
     case chat = "chat"
     case video = "video"
 }
+//
+//class TalkativeManager {
+//    var config: TalkativeConfiguration
+//    private var vc: TalkativeViewController
+//
+//    init(config: TalkativeConfiguration) {
+//        self.vc = TalkativeViewController()
+//        self.vc.config = config
+//    }
+//}
 
 final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler, WKNavigationDelegate {
-
-    private var webview = WKWebView()
-    var companyUuid: String!
-    var queueUuid: String!
-    var region: String!
-    var color: String!
-    var type: String = "chat"
-    var interactionData: Array<InteractionDataEntry>!
-    var signedInteractionData: String!
-    var onReady: ((_: WKWebView) -> Void) = { (webview) in }
-    var onInteractionStart: ((_: WKWebView) -> Void) = { (webview) in }
-    var onQosFail: ((_: WKWebView) -> Void) = { (webview) in }
-    var onInteractionFinished: ((_: WKWebView) -> Void) = { (webview) in }
-    weak var delegate: TalkativeServerDelegate?
     
     private let domain: String! = "https://talkative-cdn.com/mobile-embed/0.0.5/index.html"
-    
-    override func loadView() {
-        super.loadView()
-        self.edgesForExtendedLayout = [];
-        self.extendedLayoutIncludesOpaqueBars = true;
-        let preferences = WKPreferences()
-        let userController: WKUserContentController = WKUserContentController()
-        userController.add(self, name: "engage");
-        let webConfiguration = WKWebViewConfiguration()
-        webConfiguration.preferences = preferences
-        webConfiguration.userContentController = userController;
-        
-        // This is an addition to fix video on iPhone
-        webConfiguration.allowsInlineMediaPlayback = true
-        
-        webview = WKWebView(frame: .zero, configuration: webConfiguration)
-        webview.uiDelegate = self
-        webview.navigationDelegate = self
-
-        view = webview
-    }
+    private var webview = WKWebView()
+    weak var delegate: TalkativeServerDelegate?
+    var config = TalkativeConfiguration.defaultConfig(companyId: "bfc1d038-680e-45e0-ab57-79373c852560",
+                                                             queueId: "b0a99b74-f914-4154-88d8-d8ac5aa16d4b")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(self.webview)
-        // align webview from the left and right
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[view]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: ["view": webview]));
-
-        // align webview from the top and bottom
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: ["view": webview]));
-
-        var urlString: String = ""
-        urlString += domain
-        urlString += "?company-uuid="
-        urlString += companyUuid
-        urlString += "&queue-uuid="
-        urlString += queueUuid
-        urlString += "&region="
-        urlString += region
-        urlString += "&primary-color="
-        urlString += color
-        urlString += "&%3Aapi-features=%5B%27chat%27%2C+%27video%27%5D"
-        let link = URL(string: urlString)!
         
-        let request = URLRequest(url: link)
+//        self.edgesForExtendedLayout = [];
+//        self.extendedLayoutIncludesOpaqueBars = true;
+//        let preferences = WKPreferences()
+//        let userController: WKUserContentController = WKUserContentController()
+//        userController.add(self, name: "engage");
+//        let webConfiguration = WKWebViewConfiguration()
+//        webConfiguration.preferences = preferences
+//        webConfiguration.userContentController = userController;
+//
+//        // This is an addition to fix video on iPhone
+//        webConfiguration.allowsInlineMediaPlayback = true
+//
+//        webview = WKWebView(frame: .zero, configuration: webConfiguration)
+        webview.uiDelegate = self
+        webview.navigationDelegate = self
+        
+        self.view.addSubview(self.webview)
+        // align webview and self.view to top
+        let centerX = NSLayoutConstraint(item: webview,
+                                         attribute: .centerX,
+                                         relatedBy: .equal,
+                                         toItem: self.view,
+                                         attribute: .centerX,
+                                         multiplier: 1.0,
+                                         constant: 0.0)
+        let centerY = NSLayoutConstraint(item: webview,
+                                         attribute: .centerY,
+                                         relatedBy: .equal,
+                                         toItem: self.view,
+                                         attribute: .centerY,
+                                         multiplier: 1.0,
+                                         constant: 0.0)
+        let height = NSLayoutConstraint(item: webview,
+                                         attribute: .height,
+                                         relatedBy: .equal,
+                                         toItem: self.view,
+                                         attribute: .height,
+                                         multiplier: 1.0,
+                                         constant: 0.0)
+        let width = NSLayoutConstraint(item: webview,
+                                         attribute: .width,
+                                         relatedBy: .equal,
+                                         toItem: self.view,
+                                         attribute: .width,
+                                         multiplier: 1.0,
+                                         constant: 0.0)
+
+        
+        self.view.addConstraints([centerX, centerY, height, width])
         
         // This will be changed in future
         webview.customUserAgent = "Mozilla/5.0 (iPad; CPU OS 14_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1"
-        webview.load(request)
+        webview.load(self.prepareChatRequest())
+    }
+    
+    func prepareChatRequest() -> URLRequest {
+        var urlString: String = ""
+        urlString += domain
+        urlString += "?company-uuid="
+        urlString += config.companyId
+        urlString += "&queue-uuid="
+        urlString += config.queueId
+        urlString += "&region="
+        urlString += config.region
+        urlString += "&primary-color="
+        urlString += config.color
+        urlString += "&%3Aapi-features=%5B%27chat%27%2C+%27video%27%5D"
+        
+        let link = URL(string: urlString)!
+        return URLRequest(url: link)
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -125,20 +167,20 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
                 let jsonData = qosStringData.data(using: .utf8)!
                 let qos = try! JSONDecoder().decode(Qos.self, from: jsonData)
                 
-                if (type == "chat" && qos.chat == false || type == "video" && qos.video == false) {
-                    onQosFail(self.webview)
+                if (config.type.rawValue == "chat" && qos.chat == false || config.type.rawValue == "video" && qos.video == false) {
+//                    onQosFail(self.webview)
                     delegate?.onQosFail(reason: .slowInternet)
                 } else {
                     let jsonEncoder = JSONEncoder()
-                    let jsonData = try! jsonEncoder.encode(self.interactionData)
+                    let jsonData = try! jsonEncoder.encode(config.interactionData)
                     let str = String(data: jsonData, encoding: .utf8)!;
                     var code = ""
-                    if (self.type == "video") {
-                        code = "TalkativeEngageApi.startVideo({interactionData: " + str + ", signedInteractionData: '" + self.signedInteractionData + "'})"
+                    if (config.type.rawValue == "video") {
+                        code = "TalkativeEngageApi.startVideo({interactionData: " + str + ", signedInteractionData: '" + config.signedInteractionData + "'})"
                     } else {
-                        code = "TalkativeEngageApi.startChat({interactionData: " + str + ", signedInteractionData: '" + self.signedInteractionData + "'})"
+                        code = "TalkativeEngageApi.startChat({interactionData: " + str + ", signedInteractionData: '" + config.signedInteractionData + "'})"
                     }
-                    onReady(self.webview)
+//                    onReady(self.webview)
                     delegate?.onReady()
                     self.webview.evaluateJavaScript(code)
                 }
@@ -146,7 +188,7 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
         }
         
         if (dict["started"] != nil) {
-            onInteractionStart(self.webview)
+//            onInteractionStart(self.webview)
             delegate?.onInteractionStart()
         }
         
@@ -158,7 +200,7 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
     
     private func dismiss() {
         self.navigationController!.popViewController(animated: true)
-        onInteractionFinished(self.webview)
+//        onInteractionFinished(self.webview)
         delegate?.onInteractionFinished()
     }
     
@@ -228,6 +270,47 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
         }
     }
     
+//    static func onlineCheck(completion: @escaping (OnlineResponse?, Error?) -> Void) {
+//        let session = URLSession.shared
+//
+//        let url = URL(string: getUrlForRegion(region: region) + "/api/v1/controls/online")!
+//
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "POST"
+//
+//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//
+//        let json = [
+//            "talkative_version": "1.27.1",
+//            "talkative_company_uuid": config.companyId,
+//            "talkative_queue_uuid": config.queueId
+//        ]
+//
+//        let jsonData = try! JSONSerialization.data(withJSONObject: json, options: [])
+//
+//        let task = session.uploadTask(with: request, from: jsonData) { data, response, error in
+//            if let data = data, let dataString = String(data: data, encoding: .utf8) {
+//                print(dataString)
+//                // Serialize the data into an object
+//                do {
+//                    let json = try JSONDecoder().decode(OnlineResponse.self, from: data )
+//                    completion(json, nil)
+//
+//                } catch {
+//                    print("Error during JSON serialization: \(error.localizedDescription)")
+//                    completion(nil, error)
+//                }
+//            } else {
+//                completion(nil, error)
+//            }
+//        };
+//
+//        task.resume();
+//    }
+//
+//    static func getUrlForRegion(region: String) -> String {
+//        return "https://" + region + ".engage.app";
+//    }
 }
 
 struct MessageBody: Codable {
