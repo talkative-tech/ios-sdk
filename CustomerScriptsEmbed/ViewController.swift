@@ -3,7 +3,12 @@ import AVFoundation
 
 class ViewController: UIViewController {
         
-    //This is the action linked to the Start Video button
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        TalkativeManager.shared.serviceDelegate = self
+    }
+    
     @IBAction func onlineCheck(_ sender: Any) {
         TalkativeManager.shared.onlineCheck { (response: OnlineResponse?, error: Error?) in
             if (response != nil && response!.status == "online" && response!.features.video == true) {
@@ -25,13 +30,33 @@ class ViewController: UIViewController {
         }
     }
     
+    //This is the action linked to the Start Video button
     @IBAction func startVideo(_ sender: Any) {
         TalkativeManager.shared.startChat(type: .video)
     }
     
+    //This is the action linked to the Start Chat button
     @IBAction func startChat(_ sender: Any) {
         TalkativeManager.shared.startChat(type: .chat)
     }
     
+}
+
+extension ViewController: TalkativeServerDelegate {
+    func onReady() {
+        print("webview is ready")
+    }
+    
+    func onInteractionStart() {
+        print("chat can start")
+    }
+    
+    func onInteractionFinished() {
+        print("chan finished")
+    }
+    
+    func onQosFail(reason: QosFail) {
+        print("Error: \(reason.localizedDescription)")
+    }
 }
 

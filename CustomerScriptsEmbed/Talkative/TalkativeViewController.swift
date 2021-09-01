@@ -18,37 +18,11 @@ import WebKit
  -- Meeting Notes to questions
  - companyId queueId region is mandatory
  - user should be able to informed about call started async
+ 
+ Todo
+ - add loading hud
 
  */
-
-struct TalkativeConfiguration {
-    var companyId: String
-    var queueId: String
-    var region: String
-    var color: String
-    var type: CommunicationType
-    var interactionData: Array<InteractionDataEntry>
-    var signedInteractionData: String
-}
-
-extension TalkativeConfiguration {
-    static func defaultConfig(companyId: String, queueId: String, region: String) -> TalkativeConfiguration {
-        return TalkativeConfiguration(companyId: companyId,
-                                      queueId: queueId,
-                                      region: region,
-                                      color: "255,0,0",
-                                      type: .chat,
-                                      interactionData: [InteractionDataEntry(label: "Name", data: "John", type: "string")],
-                                      signedInteractionData: ""
-        )
-    }
-}
-
-enum QosFail: Error {
-    case slowInternet
-    case noActiveUser
-    case general(String)
-}
 
 protocol TalkativeServerDelegate: AnyObject {
     func onReady()
@@ -57,19 +31,14 @@ protocol TalkativeServerDelegate: AnyObject {
     func onInteractionFinished()
 }
 
-enum CommunicationType: String {
-    case chat = "chat"
-    case video = "video"
-}
-
 final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler, WKNavigationDelegate {
     
     private let domain: String! = "https://talkative-cdn.com/mobile-embed/0.0.5/index.html"
     private var webview: WKWebView?
     weak var delegate: TalkativeServerDelegate?
-    var config: TalkativeConfiguration
+    var config: TalkativeConfig
     
-    init(with config: TalkativeConfiguration) {
+    init(with config: TalkativeConfig) {
         self.config = config
         super.init(nibName: nil, bundle: nil)
     }
@@ -127,7 +96,6 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
                                          attribute: .width,
                                          multiplier: 1.0,
                                          constant: 0.0)
-
         
         self.view.addConstraints([centerX, centerY, height, width])
         
@@ -149,11 +117,7 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
         urlString += config.color
         urlString += "&%3Aapi-features=%5B%27chat%27%2C+%27video%27%5D"
         
-        let link = URL(string: urlString)!
-        var request = URLRequest(url: link)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        return request
+        return URLRequest(url: URL(string: urlString)!)
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -168,7 +132,6 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
                 let qos = try! JSONDecoder().decode(Qos.self, from: jsonData)
                 
                 if (config.type.rawValue == "chat" && qos.chat == false || config.type.rawValue == "video" && qos.video == false) {
-//                    onQosFail(self.webview)
                     delegate?.onQosFail(reason: .slowInternet)
                 } else {
                     let jsonEncoder = JSONEncoder()
@@ -180,7 +143,6 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
                     } else {
                         code = "TalkativeEngageApi.startChat({interactionData: " + str + ", signedInteractionData: '" + config.signedInteractionData + "'})"
                     }
-//                    onReady(self.webview)
                     delegate?.onReady()
                     self.webview!.evaluateJavaScript(code)
                 }
@@ -188,7 +150,6 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
         }
         
         if (dict["started"] != nil) {
-//            onInteractionStart(self.webview)
             delegate?.onInteractionStart()
         }
         
@@ -200,7 +161,6 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
     
     private func dismiss() {
         self.navigationController!.popViewController(animated: true)
-//        onInteractionFinished(self.webview)
         delegate?.onInteractionFinished()
     }
     
@@ -271,11 +231,26 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
     }
 }
 
-struct MessageBody: Codable {
-    let ready, final: Bool?
-    let qos: String?
+extension Dictionary {
+    func percentEncoded() -> Data? {
+        return map { key, value in
+            let escapedKey = "\(key)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
+            let escapedValue = "\(value)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
+            return escapedKey + "=" + escapedValue
+        }
+        .joined(separator: "&")
+        .data(using: .utf8)
+    }
 }
 
-struct Qos: Codable {
-    let video, chat: Bool
+extension CharacterSet {
+    static let urlQueryValueAllowed: CharacterSet = {
+        let generalDelimitersToEncode = ":#[]@" // does not include "?" or "/" due to RFC 3986 - Section 3.4
+        let subDelimitersToEncode = "!$&'()*+,;="
+
+        var allowed = CharacterSet.urlQueryAllowed
+        allowed.remove(charactersIn: "\(generalDelimitersToEncode)\(subDelimitersToEncode)")
+        return allowed
+    }()
 }
+

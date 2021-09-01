@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		32DCAE90A6F9545E8C122333 /* TalkativeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DCA53E56BA0EFF642F36F9 /* TalkativeHelper.swift */; };
+		32DCAE90A6F9545E8C122333 /* TalkativeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DCA53E56BA0EFF642F36F9 /* TalkativeModels.swift */; };
 		410F43B926DFB924009217DA /* TalkativeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F43B826DFB924009217DA /* TalkativeManager.swift */; };
+		410F43BB26DFDEE8009217DA /* TalkativeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F43BA26DFDEE8009217DA /* TalkativeConfig.swift */; };
 		846401352521FDCF0058205D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846401342521FDCF0058205D /* AppDelegate.swift */; };
 		846401372521FDCF0058205D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846401362521FDCF0058205D /* SceneDelegate.swift */; };
 		846401392521FDCF0058205D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846401382521FDCF0058205D /* ViewController.swift */; };
@@ -17,7 +18,6 @@
 		846401412521FDD30058205D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8464013F2521FDD30058205D /* LaunchScreen.storyboard */; };
 		8464016E252202030058205D /* TalkativeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8464016D252202030058205D /* TalkativeViewController.swift */; };
 		8464017425220A260058205D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8464017325220A260058205D /* WebKit.framework */; };
-		A33BC57E25ADDC8D009974B7 /* WebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A33BC57D25ADDC8D009974B7 /* WebView.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		32DCA53E56BA0EFF642F36F9 /* TalkativeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkativeHelper.swift; sourceTree = "<group>"; };
+		32DCA53E56BA0EFF642F36F9 /* TalkativeModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkativeModels.swift; sourceTree = "<group>"; };
 		410F43B826DFB924009217DA /* TalkativeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkativeManager.swift; sourceTree = "<group>"; };
+		410F43BA26DFDEE8009217DA /* TalkativeConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkativeConfig.swift; sourceTree = "<group>"; };
 		846401312521FDCF0058205D /* CustomerScriptsEmbed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomerScriptsEmbed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		846401342521FDCF0058205D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		846401362521FDCF0058205D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,7 +53,6 @@
 		846401522521FDD30058205D /* CustomerScriptsEmbedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomerScriptsEmbedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8464016D252202030058205D /* TalkativeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkativeViewController.swift; sourceTree = "<group>"; };
 		8464017325220A260058205D /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		A33BC57D25ADDC8D009974B7 /* WebView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WebView.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,10 +126,10 @@
 		A39B435A26C2A1620011DAF0 /* Talkative */ = {
 			isa = PBXGroup;
 			children = (
-				32DCA53E56BA0EFF642F36F9 /* TalkativeHelper.swift */,
-				A33BC57D25ADDC8D009974B7 /* WebView.storyboard */,
+				32DCA53E56BA0EFF642F36F9 /* TalkativeModels.swift */,
 				8464016D252202030058205D /* TalkativeViewController.swift */,
 				410F43B826DFB924009217DA /* TalkativeManager.swift */,
+				410F43BA26DFDEE8009217DA /* TalkativeConfig.swift */,
 			);
 			path = Talkative;
 			sourceTree = "<group>";
@@ -239,7 +239,6 @@
 			files = (
 				846401412521FDD30058205D /* LaunchScreen.storyboard in Resources */,
 				8464013E2521FDD30058205D /* Assets.xcassets in Resources */,
-				A33BC57E25ADDC8D009974B7 /* WebView.storyboard in Resources */,
 				8464013C2521FDCF0058205D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,8 +268,9 @@
 				410F43B926DFB924009217DA /* TalkativeManager.swift in Sources */,
 				846401352521FDCF0058205D /* AppDelegate.swift in Sources */,
 				8464016E252202030058205D /* TalkativeViewController.swift in Sources */,
+				410F43BB26DFDEE8009217DA /* TalkativeConfig.swift in Sources */,
 				846401372521FDCF0058205D /* SceneDelegate.swift in Sources */,
-				32DCAE90A6F9545E8C122333 /* TalkativeHelper.swift in Sources */,
+				32DCAE90A6F9545E8C122333 /* TalkativeModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

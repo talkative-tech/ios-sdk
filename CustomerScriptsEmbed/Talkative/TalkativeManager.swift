@@ -13,21 +13,16 @@ enum TalkativeError: Error {
 }
 
 class TalkativeManager {
-    var config: TalkativeConfiguration?
-    private var vc: TalkativeViewController? = nil
+    // General SDK Configuration
+    var config: TalkativeConfig?
+    // Delegates for informing app about conversation status
     weak var serviceDelegate: TalkativeServerDelegate?
+    // Chat interface for starting the call
+    private var vc: TalkativeViewController? = nil
     static let shared = TalkativeManager()
-//    {
-//        didSet {
-//            self.vc?.delegate = serviceDelegate
-//        }
-//    }
-    
-//    init(_ config: TalkativeConfiguration) {
-//        self.config = config
-//    }
     
     func startChat(type: CommunicationType, completion: (() -> Void)? = nil) {
+        self.config?.type = type
         guard let conf = config else {
             return
         }
@@ -49,11 +44,10 @@ class TalkativeManager {
         let url = URL(string: "https://" + conf.region + ".engage.app" + "/api/v1/controls/online")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         let json = [
-            "talkative_version": "1.27.1",
+            "talkative_version": conf.versionNumber,
             "talkative_company_uuid": conf.companyId,
             "talkative_queue_uuid": conf.queueId
         ]
