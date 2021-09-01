@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+    </dependencies>
+    <scenes>
+        <!--Talkative View Controller-->
+        <scene sceneID="d4i-hn-G2o">
+            <objects>
+                <viewController restorationIdentifier="TalkativeViewController" storyboardIdentifier="TalkativeViewController" id="vw8-2h-DTd" customClass="TalkativeViewController" customModule="CustomerScriptsEmbed" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jWZ-2Z-h6q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3049.275362318841" y="69.642857142857139"/>
+        </scene>
+    </scenes>
+</document>
