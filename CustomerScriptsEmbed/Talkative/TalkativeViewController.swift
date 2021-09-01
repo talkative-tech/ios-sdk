@@ -1,5 +1,4 @@
 import Foundation
-
 import UIKit
 import WebKit
 
@@ -33,10 +32,10 @@ struct TalkativeConfiguration {
 }
 
 extension TalkativeConfiguration {
-    static func defaultConfig(companyId: String, queueId: String) -> TalkativeConfiguration {
+    static func defaultConfig(companyId: String, queueId: String, region: String) -> TalkativeConfiguration {
         return TalkativeConfiguration(companyId: companyId,
                                       queueId: queueId,
-                                      region: "eu",
+                                      region: region,
                                       color: "255,0,0",
                                       type: .chat,
                                       interactionData: [InteractionDataEntry(label: "Name", data: "John", type: "string")],
@@ -62,68 +61,66 @@ enum CommunicationType: String {
     case chat = "chat"
     case video = "video"
 }
-//
-//class TalkativeManager {
-//    var config: TalkativeConfiguration
-//    private var vc: TalkativeViewController
-//
-//    init(config: TalkativeConfiguration) {
-//        self.vc = TalkativeViewController()
-//        self.vc.config = config
-//    }
-//}
 
 final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler, WKNavigationDelegate {
     
     private let domain: String! = "https://talkative-cdn.com/mobile-embed/0.0.5/index.html"
-    private var webview = WKWebView()
+    private var webview: WKWebView?
     weak var delegate: TalkativeServerDelegate?
-    var config = TalkativeConfiguration.defaultConfig(companyId: "bfc1d038-680e-45e0-ab57-79373c852560",
-                                                             queueId: "b0a99b74-f914-4154-88d8-d8ac5aa16d4b")
+    var config: TalkativeConfiguration
+    
+    init(with config: TalkativeConfiguration) {
+        self.config = config
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.edgesForExtendedLayout = [];
-//        self.extendedLayoutIncludesOpaqueBars = true;
-//        let preferences = WKPreferences()
-//        let userController: WKUserContentController = WKUserContentController()
-//        userController.add(self, name: "engage");
-//        let webConfiguration = WKWebViewConfiguration()
-//        webConfiguration.preferences = preferences
-//        webConfiguration.userContentController = userController;
-//
-//        // This is an addition to fix video on iPhone
-//        webConfiguration.allowsInlineMediaPlayback = true
-//
-//        webview = WKWebView(frame: .zero, configuration: webConfiguration)
-        webview.uiDelegate = self
-        webview.navigationDelegate = self
+        self.edgesForExtendedLayout = [];
+        self.extendedLayoutIncludesOpaqueBars = true;
+        let preferences = WKPreferences()
+        let userController: WKUserContentController = WKUserContentController()
+        userController.add(self, name: "engage");
+        let webConfiguration = WKWebViewConfiguration()
+        webConfiguration.preferences = preferences
+        webConfiguration.userContentController = userController;
+
+        // This is an addition to fix video on iPhone
+        webConfiguration.allowsInlineMediaPlayback = true
+
+        webview = WKWebView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), configuration: webConfiguration)
+        webview!.uiDelegate = self
+        webview!.navigationDelegate = self
         
-        self.view.addSubview(self.webview)
+        self.view.addSubview(self.webview!)
         // align webview and self.view to top
-        let centerX = NSLayoutConstraint(item: webview,
+        let centerX = NSLayoutConstraint(item: webview!,
                                          attribute: .centerX,
                                          relatedBy: .equal,
                                          toItem: self.view,
                                          attribute: .centerX,
                                          multiplier: 1.0,
                                          constant: 0.0)
-        let centerY = NSLayoutConstraint(item: webview,
+        let centerY = NSLayoutConstraint(item: webview!,
                                          attribute: .centerY,
                                          relatedBy: .equal,
                                          toItem: self.view,
                                          attribute: .centerY,
                                          multiplier: 1.0,
                                          constant: 0.0)
-        let height = NSLayoutConstraint(item: webview,
+        let height = NSLayoutConstraint(item: webview!,
                                          attribute: .height,
                                          relatedBy: .equal,
                                          toItem: self.view,
                                          attribute: .height,
                                          multiplier: 1.0,
                                          constant: 0.0)
-        let width = NSLayoutConstraint(item: webview,
+        let width = NSLayoutConstraint(item: webview!,
                                          attribute: .width,
                                          relatedBy: .equal,
                                          toItem: self.view,
@@ -135,8 +132,8 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
         self.view.addConstraints([centerX, centerY, height, width])
         
         // This will be changed in future
-        webview.customUserAgent = "Mozilla/5.0 (iPad; CPU OS 14_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1"
-        webview.load(self.prepareChatRequest())
+        webview?.customUserAgent = "Mozilla/5.0 (iPad; CPU OS 14_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1"
+        webview?.load(self.prepareChatRequest())
     }
     
     func prepareChatRequest() -> URLRequest {
@@ -153,7 +150,10 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
         urlString += "&%3Aapi-features=%5B%27chat%27%2C+%27video%27%5D"
         
         let link = URL(string: urlString)!
-        return URLRequest(url: link)
+        var request = URLRequest(url: link)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        return request
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -182,7 +182,7 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
                     }
 //                    onReady(self.webview)
                     delegate?.onReady()
-                    self.webview.evaluateJavaScript(code)
+                    self.webview!.evaluateJavaScript(code)
                 }
             }
         }
@@ -269,48 +269,6 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
             UIApplication.shared.open(url, options: [:])
         }
     }
-    
-//    static func onlineCheck(completion: @escaping (OnlineResponse?, Error?) -> Void) {
-//        let session = URLSession.shared
-//
-//        let url = URL(string: getUrlForRegion(region: region) + "/api/v1/controls/online")!
-//
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "POST"
-//
-//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//
-//        let json = [
-//            "talkative_version": "1.27.1",
-//            "talkative_company_uuid": config.companyId,
-//            "talkative_queue_uuid": config.queueId
-//        ]
-//
-//        let jsonData = try! JSONSerialization.data(withJSONObject: json, options: [])
-//
-//        let task = session.uploadTask(with: request, from: jsonData) { data, response, error in
-//            if let data = data, let dataString = String(data: data, encoding: .utf8) {
-//                print(dataString)
-//                // Serialize the data into an object
-//                do {
-//                    let json = try JSONDecoder().decode(OnlineResponse.self, from: data )
-//                    completion(json, nil)
-//
-//                } catch {
-//                    print("Error during JSON serialization: \(error.localizedDescription)")
-//                    completion(nil, error)
-//                }
-//            } else {
-//                completion(nil, error)
-//            }
-//        };
-//
-//        task.resume();
-//    }
-//
-//    static func getUrlForRegion(region: String) -> String {
-//        return "https://" + region + ".engage.app";
-//    }
 }
 
 struct MessageBody: Codable {

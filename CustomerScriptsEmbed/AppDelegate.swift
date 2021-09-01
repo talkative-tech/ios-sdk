@@ -5,6 +5,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        TalkativeManager.shared.config = TalkativeConfiguration.defaultConfig(companyId: "bfc1d038-680e-45e0-ab57-79373c852560",
+                                                                              queueId: "b0a99b74-f914-4154-88d8-d8ac5aa16d4b",
+                                                                              region: "eu")
         return true
     }
 

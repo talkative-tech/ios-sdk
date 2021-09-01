@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		32DCAE90A6F9545E8C122333 /* TalkativeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DCA53E56BA0EFF642F36F9 /* TalkativeHelper.swift */; };
+		410F43B926DFB924009217DA /* TalkativeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F43B826DFB924009217DA /* TalkativeManager.swift */; };
 		846401352521FDCF0058205D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846401342521FDCF0058205D /* AppDelegate.swift */; };
 		846401372521FDCF0058205D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846401362521FDCF0058205D /* SceneDelegate.swift */; };
 		846401392521FDCF0058205D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846401382521FDCF0058205D /* ViewController.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		32DCA53E56BA0EFF642F36F9 /* TalkativeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkativeHelper.swift; sourceTree = "<group>"; };
+		410F43B826DFB924009217DA /* TalkativeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkativeManager.swift; sourceTree = "<group>"; };
 		846401312521FDCF0058205D /* CustomerScriptsEmbed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomerScriptsEmbed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		846401342521FDCF0058205D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		846401362521FDCF0058205D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				32DCA53E56BA0EFF642F36F9 /* TalkativeHelper.swift */,
 				A33BC57D25ADDC8D009974B7 /* WebView.storyboard */,
 				8464016D252202030058205D /* TalkativeViewController.swift */,
+				410F43B826DFB924009217DA /* TalkativeManager.swift */,
 			);
 			path = Talkative;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				846401392521FDCF0058205D /* ViewController.swift in Sources */,
+				410F43B926DFB924009217DA /* TalkativeManager.swift in Sources */,
 				846401352521FDCF0058205D /* AppDelegate.swift in Sources */,
 				8464016E252202030058205D /* TalkativeViewController.swift in Sources */,
 				846401372521FDCF0058205D /* SceneDelegate.swift in Sources */,

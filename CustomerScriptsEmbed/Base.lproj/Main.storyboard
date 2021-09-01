@@ -16,25 +16,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEh-5I-kQB">
-                                <rect key="frame" x="172" y="433" width="71" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEh-5I-kQB">
+                                <rect key="frame" x="171.5" y="722" width="71" height="30"/>
                                 <state key="normal" title="Start Chat"/>
                                 <connections>
-                                    <action selector="startChat:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l0r-kE-qvG"/>
+                                    <action selector="startChat:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Ic-Nl-GXI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDU-wD-v2I">
-                                <rect key="frame" x="169" y="516" width="77" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDU-wD-v2I">
+                                <rect key="frame" x="168.5" y="792" width="77" height="30"/>
                                 <state key="normal" title="Start Video"/>
                                 <connections>
                                     <action selector="startVideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M8a-rs-Dxk"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWK-G0-8hY">
+                                <rect key="frame" x="161" y="652" width="92" height="30"/>
+                                <state key="normal" title="Online Check"/>
+                                <connections>
+                                    <action selector="onlineCheck:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LiQ-Hs-ry9"/>
+                                    <action selector="startChat:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jdA-7L-BOE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="rWK-G0-8hY" firstAttribute="centerX" secondItem="MEh-5I-kQB" secondAttribute="centerX" id="au0-tD-P46"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xDU-wD-v2I" secondAttribute="bottom" constant="40" id="dwV-nG-z5B"/>
+                            <constraint firstItem="MEh-5I-kQB" firstAttribute="top" secondItem="rWK-G0-8hY" secondAttribute="bottom" constant="40" id="fWe-F5-v7v"/>
+                            <constraint firstItem="MEh-5I-kQB" firstAttribute="centerX" secondItem="xDU-wD-v2I" secondAttribute="centerX" id="gMS-Vv-Rid"/>
+                            <constraint firstItem="xDU-wD-v2I" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="kcD-be-wo9"/>
+                            <constraint firstItem="xDU-wD-v2I" firstAttribute="top" secondItem="MEh-5I-kQB" secondAttribute="bottom" constant="40" id="xiH-L8-JkY"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bMm-Op-r9d"/>
                 </viewController>
