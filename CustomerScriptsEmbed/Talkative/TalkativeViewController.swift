@@ -3,7 +3,20 @@ import Foundation
 import UIKit
 import WebKit
 
+/**
+ Questions & Ideas
+ 
+ - why color is mandatory? it's better to have minimal effort to make SKD ready
+ - webview could be private and not given users to access it in the closures
+ - what error cases could we have? (for QosFail and/or connection )
+ -
+ 
+ 
+ */
+
 struct TalkativeConfiguration {
+    var companyUuid: String!
+    var queueUuid: String!
     var region: String = "eu"
     var color: String = "255,0,0"
     var type: CommunicationType = .chat
@@ -15,14 +28,27 @@ struct TalkativeConfiguration {
     var onInteractionFinished: ((_: WKWebView) -> Void) = { (webview) in }
 }
 
+enum QosFail: Error {
+    case slowInternet
+    case noActiveUser
+    case general(String)
+}
+
+protocol TalkativeServerDelegate: AnyObject {
+    func onReady()
+    func onInteractionStart()
+    func onQosFail(reason: QosFail) // could be good to sent error enum and/or code
+    func onInteractionFinished()
+}
+
 enum CommunicationType: String {
     case chat = "chat"
     case video = "video"
 }
 
-class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler, WKNavigationDelegate {
+final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler, WKNavigationDelegate {
 
-    @IBOutlet var webview: WKWebView!
+    private var webview = WKWebView()
     var companyUuid: String!
     var queueUuid: String!
     var region: String!
@@ -34,8 +60,9 @@ class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMessageHa
     var onInteractionStart: ((_: WKWebView) -> Void) = { (webview) in }
     var onQosFail: ((_: WKWebView) -> Void) = { (webview) in }
     var onInteractionFinished: ((_: WKWebView) -> Void) = { (webview) in }
+    weak var delegate: TalkativeServerDelegate?
     
-    let domain: String! = "https://talkative-cdn.com/mobile-embed/0.0.5/index.html"
+    private let domain: String! = "https://talkative-cdn.com/mobile-embed/0.0.5/index.html"
     
     override func loadView() {
         super.loadView()
@@ -60,6 +87,13 @@ class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMessageHa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(self.webview)
+        // align webview from the left and right
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[view]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: ["view": webview]));
+
+        // align webview from the top and bottom
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: ["view": webview]));
+
         var urlString: String = ""
         urlString += domain
         urlString += "?company-uuid="
@@ -93,6 +127,7 @@ class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMessageHa
                 
                 if (type == "chat" && qos.chat == false || type == "video" && qos.video == false) {
                     onQosFail(self.webview)
+                    delegate?.onQosFail(reason: .slowInternet)
                 } else {
                     let jsonEncoder = JSONEncoder()
                     let jsonData = try! jsonEncoder.encode(self.interactionData)
@@ -104,7 +139,7 @@ class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMessageHa
                         code = "TalkativeEngageApi.startChat({interactionData: " + str + ", signedInteractionData: '" + self.signedInteractionData + "'})"
                     }
                     onReady(self.webview)
-                    
+                    delegate?.onReady()
                     self.webview.evaluateJavaScript(code)
                 }
             }
@@ -112,6 +147,7 @@ class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMessageHa
         
         if (dict["started"] != nil) {
             onInteractionStart(self.webview)
+            delegate?.onInteractionStart()
         }
         
         //This code triggers when the user is done with the chat (after feedback)
@@ -123,6 +159,7 @@ class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMessageHa
     private func dismiss() {
         self.navigationController!.popViewController(animated: true)
         onInteractionFinished(self.webview)
+        delegate?.onInteractionFinished()
     }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo,

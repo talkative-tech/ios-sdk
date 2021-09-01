@@ -9,7 +9,7 @@ class ViewController: UIViewController {
     @IBAction func startVideo(_ sender: Any) {
         // You can get these from Engage, they identify the company
         let companyUuid: String = "96a1a295-b22c-4bba-aace-b3334d27210f"
-        let queueUuid: String = "6f4195a8-d8b3-4165-84f1-f8ed9b0bb7f8"
+        let queueUuid: String = "b0a99b74-f914-4154-88d8-d8ac5aa16d4b"
         let region: String = "eu"
         //This is an RGB value for the primary color
         let color: String = "255,0,0"
