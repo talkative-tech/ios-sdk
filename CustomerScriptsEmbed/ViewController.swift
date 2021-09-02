@@ -1,5 +1,4 @@
 import UIKit
-import AVFoundation
 
 class ViewController: UIViewController {
     
@@ -35,22 +34,22 @@ class ViewController: UIViewController {
     
     //This is the action linked to the Start Video button
     @IBAction func startVideo(_ sender: Any) {
-        TalkativeManager.shared.startInteraction(type: .video)
+        _ = TalkativeManager.shared.startInteractionImmediately(type: .video)
     }
     
     //This is the action linked to the Start Chat button
     @IBAction func startChat(_ sender: Any) {
-        TalkativeManager.shared.startInteraction(type: .chat)
+        TalkativeManager.shared.startInteractionWithCheck(type: .chat)
     }
     
     @IBAction func startChatNavigation(_ sender: Any) {
-        if let vcToPush = TalkativeManager.shared.startInteraction(type: .chat, shouldPresent: false) {
+        if let vcToPush = TalkativeManager.shared.startInteractionImmediately(type: .chat) {
             self.navigationController?.pushViewController(vcToPush, animated: true)
         }
     }
     
     @IBAction func startVideoNavigation(_ sender: Any) {
-        if let vcToPush = TalkativeManager.shared.startInteraction(type: .video, shouldPresent: false) {
+        if let vcToPush = TalkativeManager.shared.startInteractionImmediately(type: .video) {
             self.navigationController?.pushViewController(vcToPush, animated: true)
         }
     }
@@ -66,7 +65,7 @@ extension ViewController: TalkativeServerDelegate {
     }
     
     func onInteractionFinished() {
-        print("chan finished")
+        print("chat finished")
     }
     
     func onQosFail(reason: QosFail) {

@@ -32,13 +32,22 @@ protocol TalkativeServerDelegate: AnyObject {
     func onReady()
     func onInteractionStart()
     func onQosFail(reason: QosFail) // improve errors
-    func onInteractionFinished()
+    func onInteractionFinished() // clean vc from memory
+}
+
+// Default method filling for making them optional
+extension TalkativeServerDelegate {
+    func onReady() {}
+    func onInteractionStart() {}
+    func onQosFail(reason: QosFail) {}
 }
 
 final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler, WKNavigationDelegate {
     
     private let domain: String! = "https://talkative-cdn.com/mobile-embed/0.0.5/index.html"
     private var webview: WKWebView?
+    private var isLoading = true
+    private var loadingIndicator = UIActivityIndicatorView(style: .large)
     weak var delegate: TalkativeServerDelegate?
     var config: TalkativeConfig
     
@@ -54,6 +63,14 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupViews()
+        setupLayout()
+        
+        webview?.customUserAgent = "Mozilla/5.0 (iPad; CPU OS 14_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1"
+        webview?.load(self.prepareChatRequest())
+    }
+    
+    func setupViews() {
         self.edgesForExtendedLayout = [];
         self.extendedLayoutIncludesOpaqueBars = true;
         let preferences = WKPreferences()
@@ -66,46 +83,44 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
         // This is an addition to fix video on iPhone
         webConfiguration.allowsInlineMediaPlayback = true
 
-        webview = WKWebView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-20), configuration: webConfiguration)
+        webview = WKWebView(frame: CGRect.zero, configuration: webConfiguration)
         webview!.uiDelegate = self
         webview!.navigationDelegate = self
         
         self.view.addSubview(self.webview!)
-        // align webview and self.view to top
-        let centerX = NSLayoutConstraint(item: webview!,
-                                         attribute: .centerX,
-                                         relatedBy: .equal,
-                                         toItem: self.view,
-                                         attribute: .centerX,
-                                         multiplier: 1.0,
-                                         constant: 0.0)
-        let centerY = NSLayoutConstraint(item: webview!,
-                                         attribute: .centerY,
-                                         relatedBy: .equal,
-                                         toItem: self.view,
-                                         attribute: .centerY,
-                                         multiplier: 1.0,
-                                         constant: 0.0)
-        let height = NSLayoutConstraint(item: webview!,
-                                         attribute: .height,
-                                         relatedBy: .equal,
-                                         toItem: self.view,
-                                         attribute: .height,
-                                         multiplier: 1.0,
-                                         constant: 0.0)
-        let width = NSLayoutConstraint(item: webview!,
-                                         attribute: .width,
-                                         relatedBy: .equal,
-                                         toItem: self.view,
-                                         attribute: .width,
-                                         multiplier: 1.0,
-                                         constant: 0.0)
         
-        self.view.addConstraints([centerX, centerY, height, width])
+        loadingIndicator.color = .gray
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.startAnimating()
+        loadingIndicator.isUserInteractionEnabled = false
         
-        // This will be changed in future
-        webview?.customUserAgent = "Mozilla/5.0 (iPad; CPU OS 14_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1"
-        webview?.load(self.prepareChatRequest())
+        self.view.addSubview(self.webview!)
+        self.view.addSubview(loadingIndicator)
+
+    }
+    
+    func setupLayout() {
+        webview?.translatesAutoresizingMaskIntoConstraints = false
+        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        // align webview and self.view edges
+        let webViewCons = [
+            webview!.topAnchor.constraint(equalTo: self.view.topAnchor),
+            webview!.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            webview!.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            webview!.rightAnchor.constraint(equalTo: self.view.rightAnchor)
+        ]
+        
+        // align indicator and self.view edges
+        let indicatorCons = [
+            loadingIndicator.topAnchor.constraint(equalTo: self.view.topAnchor),
+            loadingIndicator.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            loadingIndicator.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            loadingIndicator.rightAnchor.constraint(equalTo: self.view.rightAnchor)
+        ]
+        
+        self.view.addConstraints(webViewCons)
+        self.view.addConstraints(indicatorCons)
     }
     
     func prepareChatRequest() -> URLRequest {
@@ -122,6 +137,10 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
         urlString += "&%3Aapi-features=%5B%27chat%27%2C+%27video%27%5D"
         
         return URLRequest(url: URL(string: urlString)!)
+    }
+    
+    deinit {
+        print("it's released")
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -155,6 +174,7 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
         
         if (dict["started"] != nil) {
             delegate?.onInteractionStart()
+            self.loadingIndicator.stopAnimating()
         }
         
         //This code triggers when the user is done with the chat (after feedback)
@@ -164,8 +184,8 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
     }
     
     private func dismiss() {
-        self.navigationController!.popViewController(animated: true)
-        delegate?.onInteractionFinished()
+        self.delegate?.onInteractionFinished()
+        self.dismiss(animated: true)
     }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo,

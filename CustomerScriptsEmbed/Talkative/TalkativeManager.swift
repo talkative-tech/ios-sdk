@@ -20,22 +20,64 @@ class TalkativeManager {
     private var vc: TalkativeViewController? = nil
     static let shared = TalkativeManager()
     
-    func startInteraction(type: CommunicationType, shouldPresent: Bool = true) -> TalkativeViewController? {
+    func startInteractionImmediately(type: CommunicationType) -> TalkativeViewController? {
         self.config?.type = type
+        
         guard let conf = config else {
             NSLog("Talkative config is not correctly set! Please visit \(tutorialPage) for more info.")
             return nil
         }
-        self.vc = TalkativeViewController(with: conf)
-        self.vc?.delegate = serviceDelegate
         
-        if shouldPresent {
+        self.vc = TalkativeViewController(with: conf)
+        // if there's no delegate manager will act as a delegate and release vc
+        // from the memory after finalizing interaction.
+        if self.serviceDelegate != nil {
+            self.vc?.delegate = self.serviceDelegate
+        } else {
+            self.vc?.delegate = self
+        }
+        
+        if let root = UIApplication.shared.windows.first?.rootViewController {
+            root.present(self.vc!, animated: true)
+        }
+        
+        return self.vc
+    }
+    
+    func startInteractionWithCheck(type: CommunicationType) {
+        self.config?.type = type
+        let group = DispatchGroup()
+        var currentStatus: AvailabilityStatus = .offline
+        
+        guard let conf = config else {
+            NSLog("Talkative config is not correctly set! Please visit \(tutorialPage) for more info.")
+            return
+        }
+        
+        group.enter()
+        self.onlineCheck { status in
+            currentStatus = status
+            group.leave()
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
+            if !currentStatus.isCommunicationAvailable(type: type) {
+                print("Current Status \(currentStatus)")
+                return
+            }
+            self.vc = TalkativeViewController(with: conf)
+            // if there's no delegate manager will act as a delegate and release vc
+            // from the memory after finalizing interaction.
+            if self.serviceDelegate != nil {
+                self.vc?.delegate = self.serviceDelegate
+            } else {
+                self.vc?.delegate = self
+            }
+            
             if let root = UIApplication.shared.windows.first?.rootViewController {
                 root.present(self.vc!, animated: true)
             }
         }
-        
-        return self.vc
     }
     
     func onlineCheck(completion: @escaping (AvailabilityStatus) -> Void) {
@@ -91,5 +133,12 @@ class TalkativeManager {
         }
 
         task.resume();
+    }
+}
+
+extension TalkativeManager: TalkativeServerDelegate {
+    func onInteractionFinished() {
+        print("TalkativeVC is released from memory")
+        self.vc = nil
     }
 }

@@ -5,12 +5,19 @@ struct OnlineResponse: Codable {
     let features: Features
 }
 
-enum AvailabilityStatus {
+enum AvailabilityStatus: Equatable {
     case chatOnly
     case videoOnly
     case chatAndVideo
     case offline
     case error(desc: String)
+    
+    func isCommunicationAvailable(type: CommunicationType) -> Bool {
+        switch type {
+        case .chat: return (self == .chatOnly || self == .chatAndVideo)
+        case .video: return (self == .videoOnly || self == .chatAndVideo)
+        }
+    }
 }
 
 struct Features: Codable {
