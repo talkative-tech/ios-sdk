@@ -38,8 +38,9 @@ class TalkativeManager {
         return self.vc
     }
     
-    func onlineCheck(completion: @escaping (OnlineResponse?, Error?) -> Void) {
+    func onlineCheck(completion: @escaping (AvailabilityStatus) -> Void) {
         guard let conf = config else {
+            NSLog("Talkative config is not correctly set! Please visit \(tutorialPage) for more info.")
             return
         }
 
@@ -62,17 +63,30 @@ class TalkativeManager {
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil && data != nil else {
+                
                 print("Error during service call \(String(describing: error))")
-                completion(nil, error)
+                completion(.error(desc: "Error during service call \(String(describing: error))"))
                 return
             }
             
             do {
                 let obj = try JSONDecoder().decode(OnlineResponse.self, from: data!)
-                completion(obj, nil)
+                if obj.status == "online" {
+                    if obj.features.chat && obj.features.video {
+                        completion(.chatAndVideo)
+                    } else if obj.features.chat {
+                        completion(.chatOnly)
+                    } else if obj.features.video {
+                        completion(.videoOnly)
+                    } else {
+                        completion(.offline)
+                    }
+                } else {
+                    completion(.offline)
+                }
             } catch {
                 print("Error during JSON serialization: \(error.localizedDescription)")
-                completion(nil, error)
+                completion(.error(desc: "Error during JSON serialization: \(error.localizedDescription)"))
             }
         }
 

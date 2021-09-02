@@ -3,28 +3,32 @@ import AVFoundation
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var statusLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         TalkativeManager.shared.serviceDelegate = self
     }
     
     @IBAction func onlineCheck(_ sender: Any) {
-        TalkativeManager.shared.onlineCheck { (response: OnlineResponse?, error: Error?) in
-            if (response != nil && response!.status == "online" && response!.features.video == true) {
-                //This starts the interaction if the queue is online
-            } else {
-                //This is where you add code to handle agents being offline
-                
-                //As an example show an alert that the queue is offline.
-                DispatchQueue.main.async(execute: {
-                    let alertController = UIAlertController(title: nil, message: "Offline", preferredStyle: .alert)
-
-                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-
-                    }))
-
-                    self.present(alertController, animated: true, completion: nil)
-                })
+        
+        TalkativeManager.shared.onlineCheck { [weak self] status in
+            var statusInfo = ""
+            switch status {
+            case .chatAndVideo:
+                statusInfo = "Chat and Video available"
+            case .chatOnly:
+                statusInfo = "Only Chat is available"
+            case .videoOnly:
+                statusInfo = "Only Video is available"
+            case .offline:
+                statusInfo = "Currently Offline"
+            case .error(let err):
+                statusInfo = "There's an error \(err)"
+            }
+            print(statusInfo)
+            DispatchQueue.main.async {
+                self?.statusLabel.text = statusInfo
             }
         }
     }

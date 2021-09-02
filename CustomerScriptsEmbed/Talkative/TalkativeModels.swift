@@ -5,6 +5,14 @@ struct OnlineResponse: Codable {
     let features: Features
 }
 
+enum AvailabilityStatus {
+    case chatOnly
+    case videoOnly
+    case chatAndVideo
+    case offline
+    case error(desc: String)
+}
+
 struct Features: Codable {
     let chat, video: Bool
 }

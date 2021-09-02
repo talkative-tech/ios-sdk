@@ -31,43 +31,55 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWK-G0-8hY">
-                                <rect key="frame" x="161" y="652" width="92" height="30"/>
+                                <rect key="frame" x="161" y="611" width="92" height="30"/>
                                 <state key="normal" title="Online Check"/>
                                 <connections>
                                     <action selector="onlineCheck:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LiQ-Hs-ry9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iwb-Hp-DNq">
-                                <rect key="frame" x="98" y="581" width="218" height="30"/>
+                                <rect key="frame" x="98" y="541" width="218" height="30"/>
                                 <state key="normal" title="Start Chat with Navigation Push"/>
                                 <connections>
                                     <action selector="startChatNavigation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eQz-01-OiI"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRc-wF-yVu">
-                                <rect key="frame" x="94.5" y="513" width="225" height="30"/>
+                                <rect key="frame" x="94.5" y="473" width="225" height="30"/>
                                 <state key="normal" title="Start Video with Navigation Push"/>
                                 <connections>
                                     <action selector="startVideoNavigation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tJb-9C-nrW"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSz-JM-Sji">
+                                <rect key="frame" x="186" y="661" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="rWK-G0-8hY" firstAttribute="centerX" secondItem="bSz-JM-Sji" secondAttribute="centerX" id="BHl-1U-Krc"/>
+                            <constraint firstItem="MEh-5I-kQB" firstAttribute="top" secondItem="bSz-JM-Sji" secondAttribute="bottom" constant="40" id="EsH-ke-KJb"/>
+                            <constraint firstItem="bSz-JM-Sji" firstAttribute="top" secondItem="rWK-G0-8hY" secondAttribute="bottom" constant="20" id="WHF-zz-pHw"/>
                             <constraint firstItem="rWK-G0-8hY" firstAttribute="centerX" secondItem="MEh-5I-kQB" secondAttribute="centerX" id="au0-tD-P46"/>
                             <constraint firstItem="Iwb-Hp-DNq" firstAttribute="top" secondItem="MRc-wF-yVu" secondAttribute="bottom" constant="38" id="bnS-i2-aib"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xDU-wD-v2I" secondAttribute="bottom" constant="40" id="dwV-nG-z5B"/>
-                            <constraint firstItem="MEh-5I-kQB" firstAttribute="top" secondItem="rWK-G0-8hY" secondAttribute="bottom" constant="40" id="fWe-F5-v7v"/>
                             <constraint firstItem="MEh-5I-kQB" firstAttribute="centerX" secondItem="xDU-wD-v2I" secondAttribute="centerX" id="gMS-Vv-Rid"/>
                             <constraint firstItem="xDU-wD-v2I" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="kcD-be-wo9"/>
-                            <constraint firstItem="rWK-G0-8hY" firstAttribute="top" secondItem="Iwb-Hp-DNq" secondAttribute="bottom" constant="41" id="l5Z-hP-enB"/>
+                            <constraint firstItem="rWK-G0-8hY" firstAttribute="top" secondItem="Iwb-Hp-DNq" secondAttribute="bottom" constant="40" id="l5Z-hP-enB"/>
                             <constraint firstItem="MRc-wF-yVu" firstAttribute="centerX" secondItem="Iwb-Hp-DNq" secondAttribute="centerX" id="okj-nm-vtj"/>
                             <constraint firstItem="Iwb-Hp-DNq" firstAttribute="centerX" secondItem="rWK-G0-8hY" secondAttribute="centerX" id="uS3-mA-YbP"/>
                             <constraint firstItem="xDU-wD-v2I" firstAttribute="top" secondItem="MEh-5I-kQB" secondAttribute="bottom" constant="40" id="xiH-L8-JkY"/>
+                            <constraint firstItem="bSz-JM-Sji" firstAttribute="centerX" secondItem="MEh-5I-kQB" secondAttribute="centerX" id="yeV-bE-QgR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bMm-Op-r9d"/>
+                    <connections>
+                        <outlet property="statusLabel" destination="bSz-JM-Sji" id="8Yl-Pv-XAm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
