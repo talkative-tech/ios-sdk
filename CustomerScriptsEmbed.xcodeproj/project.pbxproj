@@ -126,9 +126,9 @@
 		A39B435A26C2A1620011DAF0 /* Talkative */ = {
 			isa = PBXGroup;
 			children = (
+				410F43B826DFB924009217DA /* TalkativeManager.swift */,
 				32DCA53E56BA0EFF642F36F9 /* TalkativeModels.swift */,
 				8464016D252202030058205D /* TalkativeViewController.swift */,
-				410F43B826DFB924009217DA /* TalkativeManager.swift */,
 				410F43BA26DFDEE8009217DA /* TalkativeConfig.swift */,
 			);
 			path = Talkative;

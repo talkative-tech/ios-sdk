@@ -2,7 +2,6 @@ import UIKit
 import AVFoundation
 
 class ViewController: UIViewController {
-        
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +31,25 @@ class ViewController: UIViewController {
     
     //This is the action linked to the Start Video button
     @IBAction func startVideo(_ sender: Any) {
-        TalkativeManager.shared.startChat(type: .video)
+        TalkativeManager.shared.startInteraction(type: .video)
     }
     
     //This is the action linked to the Start Chat button
     @IBAction func startChat(_ sender: Any) {
-        TalkativeManager.shared.startChat(type: .chat)
+        TalkativeManager.shared.startInteraction(type: .chat)
     }
     
+    @IBAction func startChatNavigation(_ sender: Any) {
+        if let vcToPush = TalkativeManager.shared.startInteraction(type: .chat, shouldPresent: false) {
+            self.navigationController?.pushViewController(vcToPush, animated: true)
+        }
+    }
+    
+    @IBAction func startVideoNavigation(_ sender: Any) {
+        if let vcToPush = TalkativeManager.shared.startInteraction(type: .video, shouldPresent: false) {
+            self.navigationController?.pushViewController(vcToPush, animated: true)
+        }
+    }
 }
 
 extension ViewController: TalkativeServerDelegate {

@@ -19,15 +19,19 @@ import WebKit
  - companyId queueId region is mandatory
  - user should be able to informed about call started async
  
- Todo
- - add loading hud
-
+ ----------
+ - whats the purpose of signedInteractionData and interaction data entry
+ - does service version number changes sometimes?
+ - add loading hud?
+ - transition directly opening the chat
+ - add app bouncing chat button like in web?
+ -
  */
 
 protocol TalkativeServerDelegate: AnyObject {
     func onReady()
     func onInteractionStart()
-    func onQosFail(reason: QosFail) // could be good to sent error enum and/or code
+    func onQosFail(reason: QosFail) // improve errors
     func onInteractionFinished()
 }
 
@@ -62,7 +66,7 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
         // This is an addition to fix video on iPhone
         webConfiguration.allowsInlineMediaPlayback = true
 
-        webview = WKWebView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), configuration: webConfiguration)
+        webview = WKWebView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-20), configuration: webConfiguration)
         webview!.uiDelegate = self
         webview!.navigationDelegate = self
         
@@ -229,28 +233,5 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
             UIApplication.shared.open(url, options: [:])
         }
     }
-}
-
-extension Dictionary {
-    func percentEncoded() -> Data? {
-        return map { key, value in
-            let escapedKey = "\(key)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
-            let escapedValue = "\(value)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
-            return escapedKey + "=" + escapedValue
-        }
-        .joined(separator: "&")
-        .data(using: .utf8)
-    }
-}
-
-extension CharacterSet {
-    static let urlQueryValueAllowed: CharacterSet = {
-        let generalDelimitersToEncode = ":#[]@" // does not include "?" or "/" due to RFC 3986 - Section 3.4
-        let subDelimitersToEncode = "!$&'()*+,;="
-
-        var allowed = CharacterSet.urlQueryAllowed
-        allowed.remove(charactersIn: "\(generalDelimitersToEncode)\(subDelimitersToEncode)")
-        return allowed
-    }()
 }
 

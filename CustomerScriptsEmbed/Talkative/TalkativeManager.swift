@@ -8,9 +8,8 @@
 import Foundation
 import UIKit
 
-enum TalkativeError: Error {
-    case configIsNotSet
-}
+let tutorialPage: String = "https://talkative.uk/"
+let talkativeServiceVersionNumber = "1.27.0"
 
 class TalkativeManager {
     // General SDK Configuration
@@ -21,54 +20,61 @@ class TalkativeManager {
     private var vc: TalkativeViewController? = nil
     static let shared = TalkativeManager()
     
-    func startChat(type: CommunicationType, completion: (() -> Void)? = nil) {
+    func startInteraction(type: CommunicationType, shouldPresent: Bool = true) -> TalkativeViewController? {
         self.config?.type = type
         guard let conf = config else {
-            return
+            NSLog("Talkative config is not correctly set! Please visit \(tutorialPage) for more info.")
+            return nil
         }
         self.vc = TalkativeViewController(with: conf)
         self.vc?.delegate = serviceDelegate
         
-        if let root = UIApplication.shared.windows.first?.rootViewController {
-            root.present(self.vc!, animated: true, completion: completion)
+        if shouldPresent {
+            if let root = UIApplication.shared.windows.first?.rootViewController {
+                root.present(self.vc!, animated: true)
+            }
         }
+        
+        return self.vc
     }
     
     func onlineCheck(completion: @escaping (OnlineResponse?, Error?) -> Void) {
         guard let conf = config else {
             return
         }
-        
-        let session = URLSession.shared
 
         let url = URL(string: "https://" + conf.region + ".engage.app" + "/api/v1/controls/online")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let json = [
-            "talkative_version": conf.versionNumber,
+        let params: [String: Any] = [
+            "talkative_version": talkativeServiceVersionNumber,
             "talkative_company_uuid": conf.companyId,
             "talkative_queue_uuid": conf.queueId
         ]
 
-        let jsonData = try! JSONSerialization.data(withJSONObject: json, options: [])
-
-        let task = session.uploadTask(with: request, from: jsonData) { data, response, error in
-            if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                print(dataString)
-                // Serialize the data into an object
-                do {
-                    let json = try JSONDecoder().decode(OnlineResponse.self, from: data )
-                    completion(json, nil)
-                } catch {
-                    print("Error during JSON serialization: \(error.localizedDescription)")
-                    completion(nil, error)
-                }
-            } else {
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: params, options: [.prettyPrinted])
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil && data != nil else {
+                print("Error during service call \(String(describing: error))")
+                completion(nil, error)
+                return
+            }
+            
+            do {
+                let obj = try JSONDecoder().decode(OnlineResponse.self, from: data!)
+                completion(obj, nil)
+            } catch {
+                print("Error during JSON serialization: \(error.localizedDescription)")
                 completion(nil, error)
             }
-        };
+        }
 
         task.resume();
     }

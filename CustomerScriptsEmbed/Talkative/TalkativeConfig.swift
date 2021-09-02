@@ -8,7 +8,6 @@
 import Foundation
 
 struct TalkativeConfig {
-    var versionNumber: String
     var companyId: String
     var queueId: String
     var region: String
@@ -21,7 +20,6 @@ struct TalkativeConfig {
 extension TalkativeConfig {
     static func defaultConfig(companyId: String, queueId: String, region: String) -> TalkativeConfig {
         return TalkativeConfig(
-            versionNumber: "1.27.1",
             companyId: companyId,
             queueId: queueId,
             region: region,

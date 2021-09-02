@@ -35,7 +35,20 @@
                                 <state key="normal" title="Online Check"/>
                                 <connections>
                                     <action selector="onlineCheck:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LiQ-Hs-ry9"/>
-                                    <action selector="startChat:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jdA-7L-BOE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iwb-Hp-DNq">
+                                <rect key="frame" x="98" y="581" width="218" height="30"/>
+                                <state key="normal" title="Start Chat with Navigation Push"/>
+                                <connections>
+                                    <action selector="startChatNavigation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eQz-01-OiI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRc-wF-yVu">
+                                <rect key="frame" x="94.5" y="513" width="225" height="30"/>
+                                <state key="normal" title="Start Video with Navigation Push"/>
+                                <connections>
+                                    <action selector="startVideoNavigation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tJb-9C-nrW"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -43,10 +56,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="rWK-G0-8hY" firstAttribute="centerX" secondItem="MEh-5I-kQB" secondAttribute="centerX" id="au0-tD-P46"/>
+                            <constraint firstItem="Iwb-Hp-DNq" firstAttribute="top" secondItem="MRc-wF-yVu" secondAttribute="bottom" constant="38" id="bnS-i2-aib"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xDU-wD-v2I" secondAttribute="bottom" constant="40" id="dwV-nG-z5B"/>
                             <constraint firstItem="MEh-5I-kQB" firstAttribute="top" secondItem="rWK-G0-8hY" secondAttribute="bottom" constant="40" id="fWe-F5-v7v"/>
                             <constraint firstItem="MEh-5I-kQB" firstAttribute="centerX" secondItem="xDU-wD-v2I" secondAttribute="centerX" id="gMS-Vv-Rid"/>
                             <constraint firstItem="xDU-wD-v2I" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="kcD-be-wo9"/>
+                            <constraint firstItem="rWK-G0-8hY" firstAttribute="top" secondItem="Iwb-Hp-DNq" secondAttribute="bottom" constant="41" id="l5Z-hP-enB"/>
+                            <constraint firstItem="MRc-wF-yVu" firstAttribute="centerX" secondItem="Iwb-Hp-DNq" secondAttribute="centerX" id="okj-nm-vtj"/>
+                            <constraint firstItem="Iwb-Hp-DNq" firstAttribute="centerX" secondItem="rWK-G0-8hY" secondAttribute="centerX" id="uS3-mA-YbP"/>
                             <constraint firstItem="xDU-wD-v2I" firstAttribute="top" secondItem="MEh-5I-kQB" secondAttribute="bottom" constant="40" id="xiH-L8-JkY"/>
                         </constraints>
                     </view>
