@@ -7,7 +7,7 @@
 ## General info
 Talkative ios client implementation.
 	
-## Implementation
+## Installation
 ### Install with CocoaPods
 Add TalkativeSDK by following entry to your Podfile.
 
