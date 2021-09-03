@@ -5,6 +5,7 @@ struct OnlineResponse: Codable {
     let features: Features
 }
 
+/// Service availability enum
 enum AvailabilityStatus: Equatable {
     case chatOnly
     case videoOnly

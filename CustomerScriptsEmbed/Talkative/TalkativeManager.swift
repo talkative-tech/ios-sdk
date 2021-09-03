@@ -20,6 +20,10 @@ class TalkativeManager {
     private var vc: TalkativeViewController? = nil
     static let shared = TalkativeManager()
     
+    /// Starts intrecation immediately by giving TalkativeViewController to user where
+    /// he can manage routing
+    /// - Parameter type: Communication type .chat or .video
+    /// - Returns: Optional view controller in the case of error
     func startInteractionImmediately(type: CommunicationType) -> TalkativeViewController? {
         self.config?.type = type
         
@@ -36,14 +40,14 @@ class TalkativeManager {
         } else {
             self.vc?.delegate = self
         }
-        
-        if let root = UIApplication.shared.windows.first?.rootViewController {
-            root.present(self.vc!, animated: true)
-        }
-        
+                
         return self.vc
     }
     
+    /// Starts interaction after checking online availability
+    /// if there's someone online with requested communication type
+    /// directly adds controller as a modal view to the current rootViewController
+    /// - Parameter type: Communication type .chat or .video
     func startInteractionWithCheck(type: CommunicationType) {
         self.config?.type = type
         let group = DispatchGroup()
@@ -80,10 +84,12 @@ class TalkativeManager {
         }
     }
     
-    func onlineCheck(completion: @escaping (AvailabilityStatus) -> Void) {
+    /// Creates online check request to the talkative online service
+    /// - Returns: Request Obj
+    public func createRequestForOnlineCheck() -> URLRequest? {
         guard let conf = config else {
             NSLog("Talkative config is not correctly set! Please visit \(tutorialPage) for more info.")
-            return
+            return nil
         }
 
         let url = URL(string: "https://" + conf.region + ".engage.app" + "/api/v1/controls/online")!
@@ -103,7 +109,17 @@ class TalkativeManager {
             print(error.localizedDescription)
         }
         
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        return request
+    }
+    
+    /// Checks online availability of the current users in system
+    /// - Parameter completion: Closure with AvailabilityStatus enum where you can define states.
+    func onlineCheck(completion: @escaping (AvailabilityStatus) -> Void) {
+        guard let req = self.createRequestForOnlineCheck() else {
+            completion(.error(desc: "Request creation error!"))
+            return
+        }
+        let task = URLSession.shared.dataTask(with: req) { data, response, error in
             guard error == nil && data != nil else {
                 
                 print("Error during service call \(String(describing: error))")

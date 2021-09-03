@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     
     //This is the action linked to the Start Video button
     @IBAction func startVideo(_ sender: Any) {
-        _ = TalkativeManager.shared.startInteractionImmediately(type: .video)
+        TalkativeManager.shared.startInteractionWithCheck(type: .video)
     }
     
     //This is the action linked to the Start Chat button
