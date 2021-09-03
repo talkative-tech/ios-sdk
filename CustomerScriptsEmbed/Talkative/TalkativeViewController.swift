@@ -2,49 +2,28 @@ import Foundation
 import UIKit
 import WebKit
 
-/**
- Questions & Ideas
- 
- - as an user I want to give my credentials only once
- - as an user I want to call simply startChat
- - why color is mandatory? it's better to have minimal effort to make SKD ready
- - webview could be private and not given users to access it in the closures
- - what error cases could we have? (for QosFail and/or connection )
- - it's better to put talkativeHelper to TalkativeVC so user can manage from there
-    |-> why do we need online checker at the end users intend is opening a chat right
- so if there's any error it's one of the error if it's ready we can make it
- optional to start the call
- 
- -- Meeting Notes to questions
- - companyId queueId region is mandatory
- - user should be able to informed about call started async
- 
- ----------
- - whats the purpose of signedInteractionData and interaction data entry
- - does service version number changes sometimes?
- - add loading hud?
- - transition directly opening the chat
- - add app bouncing chat button like in web?
- -
- */
-
+/// Informs about status of the current ongoing interaction
 protocol TalkativeServerDelegate: AnyObject {
+    /// Ready to start webview and interaction
     func onReady()
+    /// Handshaked with service interaction started
     func onInteractionStart()
-    func onQosFail(reason: QosFail) // improve errors
-    func onInteractionFinished() // clean vc from memory
+    /// Queue Availibility problem
+    /// - Parameter reason: The error case like slow connection or noUser
+    func onQosFail(reason: QosFail)
+    /// Interaction finished will soon dismiss the view so you can release VC if you are using!
+    func onInteractionFinished()
 }
 
-// Default method filling for making them optional
 extension TalkativeServerDelegate {
     func onReady() {}
     func onInteractionStart() {}
     func onQosFail(reason: QosFail) {}
 }
 
+/// Responsible for holding webview for the interaction process and informing the delegate about changes
 final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler, WKNavigationDelegate {
     
-    private let domain: String! = "https://talkative-cdn.com/mobile-embed/0.0.5/index.html"
     private var webview: WKWebView?
     private var isLoading = true
     private var loadingIndicator = UIActivityIndicatorView(style: .large)
@@ -70,7 +49,7 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
         webview?.load(self.prepareChatRequest())
     }
     
-    func setupViews() {
+    private func setupViews() {
         self.edgesForExtendedLayout = [];
         self.extendedLayoutIncludesOpaqueBars = true;
         let preferences = WKPreferences()
@@ -99,7 +78,7 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
 
     }
     
-    func setupLayout() {
+    private func setupLayout() {
         webview?.translatesAutoresizingMaskIntoConstraints = false
         loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         
@@ -123,9 +102,9 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
         self.view.addConstraints(indicatorCons)
     }
     
-    func prepareChatRequest() -> URLRequest {
+    private func prepareChatRequest() -> URLRequest {
         var urlString: String = ""
-        urlString += domain
+        urlString += talkativeServerDomain
         urlString += "?company-uuid="
         urlString += config.companyId
         urlString += "&queue-uuid="
@@ -137,10 +116,6 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
         urlString += "&%3Aapi-features=%5B%27chat%27%2C+%27video%27%5D"
         
         return URLRequest(url: URL(string: urlString)!)
-    }
-    
-    deinit {
-        print("it's released")
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -174,7 +149,6 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
         
         if (dict["started"] != nil) {
             delegate?.onInteractionStart()
-            self.loadingIndicator.stopAnimating()
         }
         
         //This code triggers when the user is done with the chat (after feedback)
@@ -246,8 +220,9 @@ final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMes
         }
         
         let urlString = url.absoluteString.lowercased()
-        if urlString.starts(with: domain) || urlString.starts(with: "https://talkative-cdn") {
+        if urlString.starts(with: talkativeServerDomain) || urlString.starts(with: "https://talkative-cdn") {
             decisionHandler(.allow)
+            self.loadingIndicator.stopAnimating()
         } else {
             decisionHandler(.cancel)
             UIApplication.shared.open(url, options: [:])

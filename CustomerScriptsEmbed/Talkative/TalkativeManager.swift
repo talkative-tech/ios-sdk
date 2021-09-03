@@ -1,15 +1,9 @@
-//
-//  TalkativeManager.swift
-//  CustomerScriptsEmbed
-//
-//  Created by mert on 01/09/2021.
-//
-
 import Foundation
 import UIKit
 
 let tutorialPage: String = "https://talkative.uk/"
 let talkativeServiceVersionNumber = "1.27.0"
+let talkativeServerDomain: String! = "https://talkative-cdn.com/mobile-embed/0.0.5/index.html"
 
 class TalkativeManager {
     // General SDK Configuration
