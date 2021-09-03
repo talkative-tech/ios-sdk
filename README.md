@@ -20,29 +20,12 @@ Then run `pod install`.
 In any file you'd like to use Talkative in, don't forget to
 import the framework with `import TalkativeSDK`.
 
-### 1 - Setting your credentials
+### Set your credentials
 Set your credetials like below preferably in the ```AppDelegate.swift``` before starting the interaction with the service.
 ```swift
 TalkativeManager.shared.config = TalkativeConfig.defaultConfig(companyId: "Your Company ID",
                                                                 queueId: "Preferred queue ID",
                                                                 region: "Region")
-```
-### 2 - Start interaction by using manager with type
-```swift
-TalkativeManager.shared.startInteractionWithCheck(type: .video)
-```
-
-## 
-### 1 - Setting your credentials
- Set your credetials like below preferably in the ```AppDelegate.swift``` before starting the interaction with the service.
-```swift
-TalkativeManager.shared.config = TalkativeConfig.defaultConfig(companyId: "Your Company ID",
-                                                                queueId: "Preferred queue ID",
-                                                                region: "Region")
-```
-### 2 - Start interaction by using manager with type
-```swift
-TalkativeManager.shared.startInteractionWithCheck(type: .video)
 ```
 
 ## Usage
