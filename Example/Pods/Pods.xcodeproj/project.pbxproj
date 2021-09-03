@@ -1,0 +1,794 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0141D6B4CD8508B664421A3DA119BDED /* Pods-Talkative_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9393FA8C7B643A85DD3F8D48BEAFEFC1 /* Pods-Talkative_Example-dummy.m */; };
+		06187C2EEFA850F5C92C486E4C6C650B /* TalkativeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35A479B16C806A1774C2C8CEE28B00 /* TalkativeManager.swift */; };
+		089530544BD8059A83F26CAEA49D4B15 /* Talkative-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 56F3329C5F920B34F9CF0376731803AB /* Talkative-dummy.m */; };
+		20EC8829AD88FFD2A6A52879ABE8521E /* Pods-Talkative_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0487E8EC48E00B007F5DAB4AD78D33 /* Pods-Talkative_Tests-dummy.m */; };
+		257D6A7E947588E0AC40F2ADB0133AAE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		4784E354F9DC05613B44503B0D03E497 /* TalkativeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB967476058138DF6878703780DD50F6 /* TalkativeConfig.swift */; };
+		4A8E9D648436872142CCCADE45DA909A /* TalkativeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42A8A7D5692DE614543F415456F1470 /* TalkativeModels.swift */; };
+		4E84739B61C998698F57EEE1BC2E954C /* Pods-Talkative_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BB3240DCD3FB6B80929CE6AF942AED1 /* Pods-Talkative_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81EF66B8CEA511146A06F397FAD83CE0 /* Talkative-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BACB452C6BCD0D427425DFFBCCA16A15 /* Talkative-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD3A0547629556E832C732018D56EA3F /* Pods-Talkative_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EE97D708FE2B9AFC972E91F9E14960A /* Pods-Talkative_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BA5F692F7D5DB3164452881BFDEC7FE0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		BD2AF1BAE05AC2CD49FA51E87A643BC9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		ED1728F00BC6C623669C27E5329CCE65 /* TalkativeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F198A2C8511794AAB36A996CE22EF6A /* TalkativeViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		44E444B6FCE773956EEE4C6DF1ACB2A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4E57BF12F6EEF84FAC803DE6365E7017;
+			remoteInfo = "Pods-Talkative_Example";
+		};
+		60121B9A1FFCC688D07F7F32067E31D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7CFA6357C5A067A3041CA720A858580E;
+			remoteInfo = Talkative;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0D87CF5DB9A9009E37585586C624F5CD /* Pods-Talkative_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Talkative_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		110205DF34399AFC16BB535BFBB0DA62 /* Pods-Talkative_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Talkative_Example.modulemap"; sourceTree = "<group>"; };
+		2AEFD94D6A763FF54642A854844DC007 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		2CCE1C0340D6A6ACF4BA8ED725A24E54 /* Talkative.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = Talkative.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		38E6992ECF0416DE1F3688DF9F8E6837 /* Talkative.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Talkative.modulemap; sourceTree = "<group>"; };
+		4FCC7F0508D1593727D437D0048E2BF6 /* Pods-Talkative_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Talkative_Tests.modulemap"; sourceTree = "<group>"; };
+		52E28A059C786351308B9D10091EFF0D /* Pods-Talkative_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Talkative_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		56F3329C5F920B34F9CF0376731803AB /* Talkative-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Talkative-dummy.m"; sourceTree = "<group>"; };
+		5B121EB8A83760535A412B87A18415F7 /* Pods-Talkative_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Talkative_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		6BB3240DCD3FB6B80929CE6AF942AED1 /* Pods-Talkative_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Talkative_Example-umbrella.h"; sourceTree = "<group>"; };
+		6F35A479B16C806A1774C2C8CEE28B00 /* TalkativeManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TalkativeManager.swift; path = Classes/TalkativeManager.swift; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		851EA2014908E4EB89B25B4EC8A295D3 /* Talkative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Talkative.release.xcconfig; sourceTree = "<group>"; };
+		89E670545DCF18A09913C11079637FCB /* Talkative-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Talkative-prefix.pch"; sourceTree = "<group>"; };
+		8EE97D708FE2B9AFC972E91F9E14960A /* Pods-Talkative_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Talkative_Tests-umbrella.h"; sourceTree = "<group>"; };
+		9393FA8C7B643A85DD3F8D48BEAFEFC1 /* Pods-Talkative_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Talkative_Example-dummy.m"; sourceTree = "<group>"; };
+		96BAA1F0DF7D01BC0996A5DEE292F283 /* Talkative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Talkative.debug.xcconfig; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9F198A2C8511794AAB36A996CE22EF6A /* TalkativeViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TalkativeViewController.swift; path = Classes/TalkativeViewController.swift; sourceTree = "<group>"; };
+		A720C05FAD1C4516F2A621CEDA76C39D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		AB20500B9F70244510102F4D330919CF /* Pods-Talkative_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Talkative_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		AB78EA312206679957911365F5ECEC66 /* Talkative-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Talkative-Info.plist"; sourceTree = "<group>"; };
+		AB79B8D993F34BF7A25B6B6E886A4E07 /* Pods-Talkative_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Talkative_Example-frameworks.sh"; sourceTree = "<group>"; };
+		AB967476058138DF6878703780DD50F6 /* TalkativeConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TalkativeConfig.swift; path = Classes/TalkativeConfig.swift; sourceTree = "<group>"; };
+		AC7BA3BDE273012D824A790EAC60E064 /* Pods_Talkative_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Talkative_Example.framework; path = "Pods-Talkative_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B42A8A7D5692DE614543F415456F1470 /* TalkativeModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TalkativeModels.swift; path = Classes/TalkativeModels.swift; sourceTree = "<group>"; };
+		BACB452C6BCD0D427425DFFBCCA16A15 /* Talkative-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Talkative-umbrella.h"; sourceTree = "<group>"; };
+		BD0487E8EC48E00B007F5DAB4AD78D33 /* Pods-Talkative_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Talkative_Tests-dummy.m"; sourceTree = "<group>"; };
+		C254AD98BC9C892DDAB37F67F5C06CC5 /* Pods-Talkative_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Talkative_Tests-Info.plist"; sourceTree = "<group>"; };
+		CE8CFAFDEAA8AB5C71F581C683A683B1 /* Pods-Talkative_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Talkative_Example-Info.plist"; sourceTree = "<group>"; };
+		D93B6AAE89E6F9D0FE8F8EDD97537104 /* Pods-Talkative_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Talkative_Example.release.xcconfig"; sourceTree = "<group>"; };
+		DD9BBBF07208CBBE81CFDBC5DBB2AA4E /* Pods-Talkative_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Talkative_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		F37769ABCA6E9F96CAF715EA8E1830F6 /* Pods-Talkative_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Talkative_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		F555937C7E83E1C9CE7DB1471F985219 /* Pods_Talkative_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Talkative_Tests.framework; path = "Pods-Talkative_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6A46EFAA1A787F56FD295DE0DFA8CD1 /* Pods-Talkative_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Talkative_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		FFFD87F77B9E995AC885AFB5071F9C32 /* Talkative.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Talkative.framework; path = Talkative.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1B0B6D4F53D7530803073A0CFC18C65A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA5F692F7D5DB3164452881BFDEC7FE0 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		481A7BBDB3CCEBC2E542472D30A52AFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				257D6A7E947588E0AC40F2ADB0133AAE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECFE904FD60B83B09B59EE66032F6648 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD2AF1BAE05AC2CD49FA51E87A643BC9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1ED3D8E1DA6935B174C30F792DA64593 /* Talkative */ = {
+			isa = PBXGroup;
+			children = (
+				AB967476058138DF6878703780DD50F6 /* TalkativeConfig.swift */,
+				6F35A479B16C806A1774C2C8CEE28B00 /* TalkativeManager.swift */,
+				B42A8A7D5692DE614543F415456F1470 /* TalkativeModels.swift */,
+				9F198A2C8511794AAB36A996CE22EF6A /* TalkativeViewController.swift */,
+				9ACAA02AB948D2E4DDA7ECB6E22596D3 /* Pod */,
+				9CF5FD9D57B33204B108386E464D0956 /* Support Files */,
+			);
+			name = Talkative;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		38FB7CDE969C6F2C09A5BFD6FB060586 /* Pods-Talkative_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4FCC7F0508D1593727D437D0048E2BF6 /* Pods-Talkative_Tests.modulemap */,
+				F6A46EFAA1A787F56FD295DE0DFA8CD1 /* Pods-Talkative_Tests-acknowledgements.markdown */,
+				AB20500B9F70244510102F4D330919CF /* Pods-Talkative_Tests-acknowledgements.plist */,
+				BD0487E8EC48E00B007F5DAB4AD78D33 /* Pods-Talkative_Tests-dummy.m */,
+				C254AD98BC9C892DDAB37F67F5C06CC5 /* Pods-Talkative_Tests-Info.plist */,
+				8EE97D708FE2B9AFC972E91F9E14960A /* Pods-Talkative_Tests-umbrella.h */,
+				52E28A059C786351308B9D10091EFF0D /* Pods-Talkative_Tests.debug.xcconfig */,
+				F37769ABCA6E9F96CAF715EA8E1830F6 /* Pods-Talkative_Tests.release.xcconfig */,
+			);
+			name = "Pods-Talkative_Tests";
+			path = "Target Support Files/Pods-Talkative_Tests";
+			sourceTree = "<group>";
+		};
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		73C4220287B05715EAF69FF63D42A6BE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AC7BA3BDE273012D824A790EAC60E064 /* Pods_Talkative_Example.framework */,
+				F555937C7E83E1C9CE7DB1471F985219 /* Pods_Talkative_Tests.framework */,
+				FFFD87F77B9E995AC885AFB5071F9C32 /* Talkative.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9ACAA02AB948D2E4DDA7ECB6E22596D3 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				A720C05FAD1C4516F2A621CEDA76C39D /* LICENSE */,
+				2AEFD94D6A763FF54642A854844DC007 /* README.md */,
+				2CCE1C0340D6A6ACF4BA8ED725A24E54 /* Talkative.podspec */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		9CF5FD9D57B33204B108386E464D0956 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				38E6992ECF0416DE1F3688DF9F8E6837 /* Talkative.modulemap */,
+				56F3329C5F920B34F9CF0376731803AB /* Talkative-dummy.m */,
+				AB78EA312206679957911365F5ECEC66 /* Talkative-Info.plist */,
+				89E670545DCF18A09913C11079637FCB /* Talkative-prefix.pch */,
+				BACB452C6BCD0D427425DFFBCCA16A15 /* Talkative-umbrella.h */,
+				96BAA1F0DF7D01BC0996A5DEE292F283 /* Talkative.debug.xcconfig */,
+				851EA2014908E4EB89B25B4EC8A295D3 /* Talkative.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/Talkative";
+			sourceTree = "<group>";
+		};
+		C497A0D46E854BDB9ADBDB184133330D /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E493C5B9955EA60C42760DCDCFABE6B4 /* Pods-Talkative_Example */,
+				38FB7CDE969C6F2C09A5BFD6FB060586 /* Pods-Talkative_Tests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		C98418EAEEA46CE0D74BBCFBB2C09C1F /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1ED3D8E1DA6935B174C30F792DA64593 /* Talkative */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				C98418EAEEA46CE0D74BBCFBB2C09C1F /* Development Pods */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				73C4220287B05715EAF69FF63D42A6BE /* Products */,
+				C497A0D46E854BDB9ADBDB184133330D /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E493C5B9955EA60C42760DCDCFABE6B4 /* Pods-Talkative_Example */ = {
+			isa = PBXGroup;
+			children = (
+				110205DF34399AFC16BB535BFBB0DA62 /* Pods-Talkative_Example.modulemap */,
+				0D87CF5DB9A9009E37585586C624F5CD /* Pods-Talkative_Example-acknowledgements.markdown */,
+				5B121EB8A83760535A412B87A18415F7 /* Pods-Talkative_Example-acknowledgements.plist */,
+				9393FA8C7B643A85DD3F8D48BEAFEFC1 /* Pods-Talkative_Example-dummy.m */,
+				AB79B8D993F34BF7A25B6B6E886A4E07 /* Pods-Talkative_Example-frameworks.sh */,
+				CE8CFAFDEAA8AB5C71F581C683A683B1 /* Pods-Talkative_Example-Info.plist */,
+				6BB3240DCD3FB6B80929CE6AF942AED1 /* Pods-Talkative_Example-umbrella.h */,
+				DD9BBBF07208CBBE81CFDBC5DBB2AA4E /* Pods-Talkative_Example.debug.xcconfig */,
+				D93B6AAE89E6F9D0FE8F8EDD97537104 /* Pods-Talkative_Example.release.xcconfig */,
+			);
+			name = "Pods-Talkative_Example";
+			path = "Target Support Files/Pods-Talkative_Example";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		7A2971FD61AD5A2DFE31098F76046501 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E84739B61C998698F57EEE1BC2E954C /* Pods-Talkative_Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A779B7DEF7B6215A2E630D63F1B8F2A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81EF66B8CEA511146A06F397FAD83CE0 /* Talkative-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4D7A6E668F1A628347C00FF2B16F6FC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD3A0547629556E832C732018D56EA3F /* Pods-Talkative_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4E57BF12F6EEF84FAC803DE6365E7017 /* Pods-Talkative_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 031A3C7886EF14A0686F62954CFC140C /* Build configuration list for PBXNativeTarget "Pods-Talkative_Example" */;
+			buildPhases = (
+				7A2971FD61AD5A2DFE31098F76046501 /* Headers */,
+				08AEB57C0FA9FDD2CB3FD2113C7E0A9F /* Sources */,
+				ECFE904FD60B83B09B59EE66032F6648 /* Frameworks */,
+				4433B8CC56BA52FB59357C989D7F3868 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4970B0836DB7BDCF99744D721B335BA9 /* PBXTargetDependency */,
+			);
+			name = "Pods-Talkative_Example";
+			productName = "Pods-Talkative_Example";
+			productReference = AC7BA3BDE273012D824A790EAC60E064 /* Pods_Talkative_Example.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5B293AB619142CC9D483B73CE7BEBF17 /* Pods-Talkative_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79CA1208543051E6EDA81D454D8AECCD /* Build configuration list for PBXNativeTarget "Pods-Talkative_Tests" */;
+			buildPhases = (
+				F4D7A6E668F1A628347C00FF2B16F6FC /* Headers */,
+				04161E4AB98E86BAA7581088FAC4D42E /* Sources */,
+				481A7BBDB3CCEBC2E542472D30A52AFA /* Frameworks */,
+				AA6216626D3E0A9E717488A47E6540E0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C3738BEED3DB4894FA1E717D8DA3CEB6 /* PBXTargetDependency */,
+			);
+			name = "Pods-Talkative_Tests";
+			productName = "Pods-Talkative_Tests";
+			productReference = F555937C7E83E1C9CE7DB1471F985219 /* Pods_Talkative_Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		7CFA6357C5A067A3041CA720A858580E /* Talkative */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C7EB4271B77507D0D0FD45B3376019A /* Build configuration list for PBXNativeTarget "Talkative" */;
+			buildPhases = (
+				9A779B7DEF7B6215A2E630D63F1B8F2A /* Headers */,
+				7AC501CA4F6AA6B2008856A9DCC78BEC /* Sources */,
+				1B0B6D4F53D7530803073A0CFC18C65A /* Frameworks */,
+				C481DDBAFD671E2D0F99EDFA0ED42BBF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Talkative;
+			productName = Talkative;
+			productReference = FFFD87F77B9E995AC885AFB5071F9C32 /* Talkative.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 73C4220287B05715EAF69FF63D42A6BE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4E57BF12F6EEF84FAC803DE6365E7017 /* Pods-Talkative_Example */,
+				5B293AB619142CC9D483B73CE7BEBF17 /* Pods-Talkative_Tests */,
+				7CFA6357C5A067A3041CA720A858580E /* Talkative */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4433B8CC56BA52FB59357C989D7F3868 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA6216626D3E0A9E717488A47E6540E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C481DDBAFD671E2D0F99EDFA0ED42BBF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04161E4AB98E86BAA7581088FAC4D42E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20EC8829AD88FFD2A6A52879ABE8521E /* Pods-Talkative_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08AEB57C0FA9FDD2CB3FD2113C7E0A9F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0141D6B4CD8508B664421A3DA119BDED /* Pods-Talkative_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AC501CA4F6AA6B2008856A9DCC78BEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				089530544BD8059A83F26CAEA49D4B15 /* Talkative-dummy.m in Sources */,
+				4784E354F9DC05613B44503B0D03E497 /* TalkativeConfig.swift in Sources */,
+				06187C2EEFA850F5C92C486E4C6C650B /* TalkativeManager.swift in Sources */,
+				4A8E9D648436872142CCCADE45DA909A /* TalkativeModels.swift in Sources */,
+				ED1728F00BC6C623669C27E5329CCE65 /* TalkativeViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4970B0836DB7BDCF99744D721B335BA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Talkative;
+			target = 7CFA6357C5A067A3041CA720A858580E /* Talkative */;
+			targetProxy = 60121B9A1FFCC688D07F7F32067E31D9 /* PBXContainerItemProxy */;
+		};
+		C3738BEED3DB4894FA1E717D8DA3CEB6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Talkative_Example";
+			target = 4E57BF12F6EEF84FAC803DE6365E7017 /* Pods-Talkative_Example */;
+			targetProxy = 44E444B6FCE773956EEE4C6DF1ACB2A9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		125C51B0F88E28C868DC90BD45E4E727 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		495BE3D16F8787C8A337E93293EA8A8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD9BBBF07208CBBE81CFDBC5DBB2AA4E /* Pods-Talkative_Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Talkative_Example/Pods-Talkative_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Talkative_Example/Pods-Talkative_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8BA4CD3BD5C00F7C6C6F80F97414E8E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D93B6AAE89E6F9D0FE8F8EDD97537104 /* Pods-Talkative_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Talkative_Example/Pods-Talkative_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Talkative_Example/Pods-Talkative_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		92A3E9AC052A7345115439021B218E3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		99712C024A5BF31BDFC7C7CEC967FE81 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 851EA2014908E4EB89B25B4EC8A295D3 /* Talkative.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Talkative/Talkative-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Talkative/Talkative-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Talkative/Talkative.modulemap";
+				PRODUCT_MODULE_NAME = Talkative;
+				PRODUCT_NAME = Talkative;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		BBB4CE932460EC914F3F20C922E9ABF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52E28A059C786351308B9D10091EFF0D /* Pods-Talkative_Tests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Talkative_Tests/Pods-Talkative_Tests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Talkative_Tests/Pods-Talkative_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BC6758B6D41F79CF71819BFEAF868DCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F37769ABCA6E9F96CAF715EA8E1830F6 /* Pods-Talkative_Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Talkative_Tests/Pods-Talkative_Tests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Talkative_Tests/Pods-Talkative_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E0673502BDD328496B02FC7082999CA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96BAA1F0DF7D01BC0996A5DEE292F283 /* Talkative.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Talkative/Talkative-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Talkative/Talkative-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Talkative/Talkative.modulemap";
+				PRODUCT_MODULE_NAME = Talkative;
+				PRODUCT_NAME = Talkative;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		031A3C7886EF14A0686F62954CFC140C /* Build configuration list for PBXNativeTarget "Pods-Talkative_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				495BE3D16F8787C8A337E93293EA8A8C /* Debug */,
+				8BA4CD3BD5C00F7C6C6F80F97414E8E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				125C51B0F88E28C868DC90BD45E4E727 /* Debug */,
+				92A3E9AC052A7345115439021B218E3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C7EB4271B77507D0D0FD45B3376019A /* Build configuration list for PBXNativeTarget "Talkative" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E0673502BDD328496B02FC7082999CA9 /* Debug */,
+				99712C024A5BF31BDFC7C7CEC967FE81 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		79CA1208543051E6EDA81D454D8AECCD /* Build configuration list for PBXNativeTarget "Pods-Talkative_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBB4CE932460EC914F3F20C922E9ABF6 /* Debug */,
+				BC6758B6D41F79CF71819BFEAF868DCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

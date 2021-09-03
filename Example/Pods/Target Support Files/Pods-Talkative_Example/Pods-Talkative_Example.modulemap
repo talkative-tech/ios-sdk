@@ -1,0 +1,6 @@
+framework module Pods_Talkative_Example {
+  umbrella header "Pods-Talkative_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

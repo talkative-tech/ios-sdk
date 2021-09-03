@@ -1,0 +1,16 @@
+PODS:
+  - Talkative (0.1.0)
+
+DEPENDENCIES:
+  - Talkative (from `../`)
+
+EXTERNAL SOURCES:
+  Talkative:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Talkative: 6bedb735ac444b0db53425bfd8f95aa5f5056ee2
+
+PODFILE CHECKSUM: 3f3fcb6ccd3b279b1e357be27dfb05b697c42d41
+
+COCOAPODS: 1.10.1

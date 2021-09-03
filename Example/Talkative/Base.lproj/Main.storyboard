@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Agv-Ng-ysS">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="Talkative_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WaY-cM-Ra3">
+                                <rect key="frame" x="20" y="597" width="141" height="30"/>
+                                <state key="normal" title="Start video as modal"/>
+                                <connections>
+                                    <action selector="startVideoModalClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Vcw-Xw-pdP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rwu-wT-Ymj">
+                                <rect key="frame" x="20" y="547" width="134" height="30"/>
+                                <state key="normal" title="Start chat as modal"/>
+                                <connections>
+                                    <action selector="startChatModalClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="WDS-E1-g4v"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWq-p5-6dm">
+                                <rect key="frame" x="127.5" y="80" width="120" height="30"/>
+                                <state key="normal" title="Availability Check"/>
+                                <connections>
+                                    <action selector="availabilityCheckClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="arv-7F-Dv7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVF-AH-etT">
+                                <rect key="frame" x="20" y="477" width="175" height="30"/>
+                                <state key="normal" title="Start chat with navigation"/>
+                                <connections>
+                                    <action selector="startChatNavigationClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="erU-hp-7LR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAV-db-zPf">
+                                <rect key="frame" x="20" y="427" width="183" height="30"/>
+                                <state key="normal" title="Start video with navigation"/>
+                                <connections>
+                                    <action selector="startVideoNavigationClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="bNi-hc-JWq"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NgV-2V-LAP">
+                                <rect key="frame" x="163" y="130" width="49" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="NgV-2V-LAP" firstAttribute="top" secondItem="EWq-p5-6dm" secondAttribute="bottom" constant="20" id="6iu-Kc-Vb6"/>
+                            <constraint firstItem="EWq-p5-6dm" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="DwG-pu-qOB"/>
+                            <constraint firstItem="WaY-cM-Ra3" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="FLc-h7-83K"/>
+                            <constraint firstItem="WaY-cM-Ra3" firstAttribute="top" secondItem="Rwu-wT-Ymj" secondAttribute="bottom" constant="20" id="LcL-da-cc5"/>
+                            <constraint firstItem="mVF-AH-etT" firstAttribute="top" secondItem="mAV-db-zPf" secondAttribute="bottom" constant="20" id="Tvx-dK-HNE"/>
+                            <constraint firstItem="EWq-p5-6dm" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="36" id="Xxa-nS-kod"/>
+                            <constraint firstItem="Rwu-wT-Ymj" firstAttribute="leading" secondItem="WaY-cM-Ra3" secondAttribute="leading" id="fVt-zm-AGN"/>
+                            <constraint firstItem="mVF-AH-etT" firstAttribute="leading" secondItem="Rwu-wT-Ymj" secondAttribute="leading" id="hVv-7V-lBh"/>
+                            <constraint firstItem="mAV-db-zPf" firstAttribute="leading" secondItem="mVF-AH-etT" secondAttribute="leading" id="oNj-ei-n3f"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="WaY-cM-Ra3" secondAttribute="bottom" constant="40" id="rgc-vW-xFX"/>
+                            <constraint firstItem="NgV-2V-LAP" firstAttribute="centerX" secondItem="EWq-p5-6dm" secondAttribute="centerX" id="rtf-de-HHc"/>
+                            <constraint firstItem="Rwu-wT-Ymj" firstAttribute="top" secondItem="mVF-AH-etT" secondAttribute="bottom" constant="40" id="uAB-l2-pYX"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="hZe-vt-5zD"/>
+                    <connections>
+                        <outlet property="statusLabel" destination="NgV-2V-LAP" id="9uf-Hc-3eN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1253.5999999999999" y="130.88455772113943"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vlB-ze-wBY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Agv-Ng-ysS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gIc-sF-msq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="TIT-9y-4qE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="37e-Ms-28S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="333.60000000000002" y="130.88455772113943"/>
+        </scene>
+    </scenes>
+</document>

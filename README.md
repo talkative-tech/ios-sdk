@@ -1,4 +1,10 @@
-## Talkative iOS SDK
+# Talkative
+
+[![CI Status](https://img.shields.io/travis/mert/Talkative.svg?style=flat)](https://travis-ci.org/mert/Talkative)
+[![Version](https://img.shields.io/cocoapods/v/Talkative.svg?style=flat)](https://cocoapods.org/pods/Talkative)
+[![License](https://img.shields.io/cocoapods/l/Talkative.svg?style=flat)](https://cocoapods.org/pods/Talkative)
+[![Platform](https://img.shields.io/cocoapods/p/Talkative.svg?style=flat)](https://cocoapods.org/pods/Talkative)
+
 * [General info](#general-info)
 * [Installation](#Installation)
 * [Usage](#Usage)
@@ -6,13 +12,13 @@
 
 ## General info
 Talkative ios client implementation.
-	
+    
 ## Installation
 ### Install with CocoaPods
 Add TalkativeSDK by following entry to your Podfile.
 
 ```rb
-pod 'TalkativeSDK', '~> 14.0'
+pod 'Talkative'
 ```
 
 Then run `pod install`.
@@ -87,3 +93,7 @@ Possible conditions.
 You can check example app for more detail.
 ## Contact
 TBD
+
+## License
+TBD
+Talkative is available under the MIT license. See the LICENSE file for more info.
