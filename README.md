@@ -15,7 +15,7 @@ Talkative ios client implementation.
     
 ## Installation
 ### Install with CocoaPods
-Add TalkativeSDK by following entry to your Podfile.
+Add Talkative by following entry to your Podfile.
 
 ```rb
 pod 'Talkative'
@@ -24,7 +24,7 @@ pod 'Talkative'
 Then run `pod install`.
 
 In any file you'd like to use Talkative in, don't forget to
-import the framework with `import TalkativeSDK`.
+import the framework with `import Talkative`.
 
 ### Set your credentials
 Set your credetials like below preferably in the ```AppDelegate.swift``` before starting the interaction with the service.
