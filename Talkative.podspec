@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Talkative'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.summary          = 'Talkative lets you connect with customers on their channel of choice.'
 
 # This description is used to generate tags and improve search results.
@@ -21,8 +21,8 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/talkative-tech/ios-sdk'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'mert' => 'mertnesvat@gmail.com' }
+  s.license          = { :type => 'All rights reserved.' }
+  s.author           = { 'Talkative' => 'support@talkative.uk' }
   s.source           = { :git => 'https://github.com/talkative-tech/ios-sdk.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   s.swift_version = '5.0'

@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-let tutorialPage: String = "https://talkative.uk/"
 let talkativeServiceVersionNumber = "1.27.0"
 let talkativeServerDomain: String! = "https://talkative-cdn.com/mobile-embed/0.0.5/index.html"
 
@@ -15,14 +14,14 @@ public class TalkativeManager {
     public static let shared = TalkativeManager()
     
     /// Starts intrecation immediately by giving TalkativeViewController to user where
-    /// he can manage routing
+    /// they can manage routing
     /// - Parameter type: Communication type .chat or .video
     /// - Returns: Optional view controller in the case of error
     public func startInteractionImmediately(type: CommunicationType) -> TalkativeViewController? {
         self.config?.type = type
         
         guard let conf = config else {
-            NSLog("Talkative config is not correctly set! Please visit \(tutorialPage) for more info.")
+            NSLog("Talkative config is not correctly set!")
             return nil
         }
         
@@ -45,7 +44,7 @@ public class TalkativeManager {
         var currentStatus: AvailabilityStatus = .offline
         
         guard let conf = config else {
-            NSLog("Talkative config is not correctly set! Please visit \(tutorialPage) for more info.")
+            NSLog("Talkative config is not correctly set!")
             return
         }
         
@@ -76,7 +75,7 @@ public class TalkativeManager {
     /// - Returns: Request Obj
     public func createRequestForOnlineCheck() -> URLRequest? {
         guard let conf = config else {
-            NSLog("Talkative config is not correctly set! Please visit \(tutorialPage) for more info.")
+            NSLog("Talkative config is not correctly set!")
             return nil
         }
 

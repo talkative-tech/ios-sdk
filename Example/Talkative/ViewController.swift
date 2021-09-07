@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  Talkative
-//
-//  Created by mert on 09/03/2021.
-//  Copyright (c) 2021 mert. All rights reserved.
-//
-
 import UIKit
 import Talkative
 

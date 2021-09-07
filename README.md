@@ -1,14 +1,11 @@
 # Talkative
 
-[![CI Status](https://img.shields.io/travis/mert/Talkative.svg?style=flat)](https://travis-ci.org/mert/Talkative)
 [![Version](https://img.shields.io/cocoapods/v/Talkative.svg?style=flat)](https://cocoapods.org/pods/Talkative)
-[![License](https://img.shields.io/cocoapods/l/Talkative.svg?style=flat)](https://cocoapods.org/pods/Talkative)
 [![Platform](https://img.shields.io/cocoapods/p/Talkative.svg?style=flat)](https://cocoapods.org/pods/Talkative)
 
 * [General info](#general-info)
 * [Installation](#Installation)
 * [Usage](#Usage)
-* [Contact](#contact)
 
 ## General info
 Talkative ios client implementation.
@@ -91,9 +88,3 @@ Possible conditions.
 ```
 
 You can check example app for more detail.
-## Contact
-TBD
-
-## License
-TBD
-Talkative is available under the MIT license. See the LICENSE file for more info.

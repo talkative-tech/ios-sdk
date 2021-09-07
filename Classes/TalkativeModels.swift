@@ -29,7 +29,7 @@ struct Reasons: Codable {
     let chat, video: String
 }
 
-struct InteractionDataEntry: Codable {
+public struct InteractionDataEntry: Codable {
     let label, data, type: String
 }
 

@@ -8,18 +8,20 @@ public struct TalkativeConfig {
     var type: CommunicationType
     var interactionData: Array<InteractionDataEntry>
     var signedInteractionData: String
+    var extraUrlParams: String
 }
 
 extension TalkativeConfig {
-    public static func defaultConfig(companyId: String, queueId: String, region: String) -> TalkativeConfig {
+    public static func defaultConfig(companyId: String, queueId: String, region: String, interactionData: Array<InteractionDataEntry> = [], signedInteractionData: String = "", color: String = "255,0,0", extraUrlParams: String = "") -> TalkativeConfig {
         return TalkativeConfig(
             companyId: companyId,
             queueId: queueId,
             region: region,
-            color: "255,0,0",
+            color: color,
             type: .chat,
-            interactionData: [InteractionDataEntry(label: "Name", data: "John", type: "string")],
-            signedInteractionData: ""
+            interactionData: interactionData,
+            signedInteractionData: signedInteractionData,
+            extraUrlParams: extraUrlParams
         )
     }
 }

@@ -45,7 +45,6 @@
 		6CE8A2F04C2E7F0AC9C5EB97 /* Pods-Talkative_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Talkative_Example.debug.xcconfig"; path = "Target Support Files/Pods-Talkative_Example/Pods-Talkative_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		7E7BCB7F91D785EC48EC6BA2 /* Pods-Talkative_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Talkative_Tests.release.xcconfig"; path = "Target Support Files/Pods-Talkative_Tests/Pods-Talkative_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		9BEF94A48A6C7897B0254AEA /* Pods_Talkative_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Talkative_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C57343FA8C6A897D4203BB6C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		D7C12020916C83E47FCAE29D /* Pods_Talkative_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Talkative_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -143,7 +142,6 @@
 			children = (
 				396520EE3143A7E23FA8BD29 /* Talkative.podspec */,
 				378AEDF5745DD62862DA6A12 /* README.md */,
-				C57343FA8C6A897D4203BB6C /* LICENSE */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";

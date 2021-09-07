@@ -108,6 +108,7 @@ public final class TalkativeViewController: UIViewController, WKUIDelegate, WKSc
         urlString += "&primary-color="
         urlString += config.color
         urlString += "&%3Aapi-features=%5B%27chat%27%2C+%27video%27%5D"
+        urlString += "&" + config.extraUrlParams
         
         return URLRequest(url: URL(string: urlString)!)
     }
