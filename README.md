@@ -20,21 +20,38 @@ pod 'Talkative'
 
 Then run `pod install`.
 
-In any file you'd like to use Talkative in, don't forget to
-import the framework with `import Talkative`.
+In any file you'd like to use Talkative in, don't forget to import the framework with `import Talkative`.
 
 ### Set your credentials
 Set your credetials like below preferably in the ```AppDelegate.swift``` before starting the interaction with the service.
 ```swift
-TalkativeManager.shared.config = TalkativeConfig.defaultConfig(companyId: "Your Company ID",
-                                                                queueId: "Preferred queue ID",
+TalkativeManager.shared.config = TalkativeConfig.defaultConfig(companyId: "Your Company UUID",
+                                                                queueId: "Preferred queue UUID",
                                                                 region: "Region")
 ```
+
+Possible regions include "eu", "au", "us".
 
 ## Usage
 After installation, using talkative is very simple and you can access to all the states with methods below.
 
-Checking online status
+For video to work you will need to add to your info.plist file 
+
+`Privacy - Microphone Usage Description` which is a string for the description of the microphone permission prompt.
+
+`Privacy - Camera Usage Description` which is a string for the description of the camera permission prompt.
+
+Starting interaction if the system is online. This will open the interaction in a modal, after doing an online check.
+```swift
+    TalkativeManager.shared.startInteractionWithCheck(type: .chat)
+```
+
+Starting interaction immediately without check, recommended as it gives you the most control. This will return a view controller instance for you to handle with your existing navigation code as you would like. This function also doesn't do an online check.
+```swift
+    TalkativeManager.shared.startInteractionImmediately(type: .chat) 
+```
+
+Checking online status manually. Useful for use with `startInteractionImmediately`.
 ```swift
     TalkativeManager.shared.onlineCheck { status in
         var statusInfo = ""
@@ -52,17 +69,9 @@ Checking online status
         }
     }
 ```
-Starting interaction if the system is online
-```swift
-    TalkativeManager.shared.startInteractionWithCheck(type: .chat)
-```
 
-Starting interaction immediately without check
-```swift
-    TalkativeManager.shared.startInteractionImmediately(type: .chat) 
-```
 
-If you want to be notified about states before starting the interaction set your delegated class which conform to ```TalkativeServerDelegate``` protocol
+If you want to be notified about states before starting the interaction set your delegated class which conforms to the ```TalkativeServerDelegate``` protocol
 ```swift 
     TalkativeManager.shared.serviceDelegate = self
 ```
@@ -87,4 +96,4 @@ Possible conditions.
     }
 ```
 
-You can check example app for more detail.
+You can check the example app for more detail.

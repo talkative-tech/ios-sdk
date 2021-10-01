@@ -223,5 +223,11 @@ public final class TalkativeViewController: UIViewController, WKUIDelegate, WKSc
             UIApplication.shared.open(url, options: [:])
         }
     }
+    
+    @available(iOS 15.0, *)
+    public func webView(_ webView: WKWebView, requestMediaCapturePermissionFor origin: WKSecurityOrigin, initiatedByFrame frame: WKFrameInfo, type: WKMediaCaptureType, decisionHandler: @escaping (WKPermissionDecision) -> Void) {
+
+        decisionHandler(.grant)
+    }
 }
 

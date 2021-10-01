@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Talkative'
-  s.version          = '0.2.0'
+  s.version          = '0.3.0'
   s.summary          = 'Talkative lets you connect with customers on their channel of choice.'
 
 # This description is used to generate tags and improve search results.
