@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Talkative'
-  s.version          = '0.3.0'
+  s.version          = '0.4.0'
   s.summary          = 'Talkative lets you connect with customers on their channel of choice.'
 
 # This description is used to generate tags and improve search results.
@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   s.swift_version = '5.0'
   s.cocoapods_version = '>= 1.10.0'
-  s.ios.deployment_target = '14.3'
+  s.ios.deployment_target = '14.5'
 
   s.source_files = 'Classes/**/*'
   

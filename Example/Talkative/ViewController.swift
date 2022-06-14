@@ -5,51 +5,56 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var statusLabel: UILabel!
     
+    public weak var vc: TalkativeViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        var interactionData: [InteractionDataEntry] = []
+        let interactionData1 = try! JSONDecoder().decode(InteractionDataEntry.self, from: "{\"label\": \"Email\", \"name\": \"email\", \"type\": \"string\", \"data\": \"email@example.com\"}".data(using: .utf8)!)
+        interactionData.append(interactionData1)
+        
+        // Override point for customization after application launch.
+        TalkativeManager.shared.config = TalkativeConfig.defaultConfig(widgetUuid: "0682b469-b3f6-459a-8b6c-7e852071f066",
+                                                                       region: "eu", interactionData: interactionData)
         TalkativeManager.shared.serviceDelegate = self
     }
     
     @IBAction func availabilityCheckClicked(_ sender: Any) {
-        TalkativeManager.shared.onlineCheck { [weak self] status in
+        TalkativeManager.shared.onlineCheck(queueUuid: "0ec9ea36-5d0d-4d91-b63b-7325d855fca4") { [weak self] status in
             var statusInfo = ""
             switch status {
-            case .chatAndVideo:
-                statusInfo = "Chat and Video available"
-            case .chatOnly:
-                statusInfo = "Only Chat is available"
-            case .videoOnly:
-                statusInfo = "Only Video is available"
+            case .online:
+                statusInfo = "Currently Online"
             case .offline:
                 statusInfo = "Currently Offline"
             case .error(let err):
                 statusInfo = "There's an error \(err)"
             }
-            print(statusInfo)
             DispatchQueue.main.async {
                 self?.statusLabel.text = statusInfo
             }
         }
     }
     
-    //This is the action linked to the Start Video button
-    @IBAction func startVideoModalClicked(_ sender: Any) {
-        TalkativeManager.shared.startInteractionWithCheck(type: .video)
-    }
-    //This is the action linked to the Start Chat button
-    @IBAction func startChatModalClicked(_ sender: Any) {
-        TalkativeManager.shared.startInteractionWithCheck(type: .chat)
-    }
-    
-    @IBAction func startChatNavigationClicked(_ sender: Any) {
-        if let vcToPush = TalkativeManager.shared.startInteractionImmediately(type: .chat) {
-            self.navigationController?.pushViewController(vcToPush, animated: true)
+    @IBAction func openWidget(_ sender: Any) {
+        if (self.vc == nil) {
+            if let vcToPush = TalkativeManager.shared.startInteraction() {
+                self.vc = vcToPush
+                self.navigationController?.pushViewController(vcToPush, animated: true)
+            }
+        } else {
+            self.navigationController?.pushViewController(self.vc!, animated: true)
         }
     }
     
-    @IBAction func startVideoNavigationClicked(_ sender: Any) {
-        if let vcToPush = TalkativeManager.shared.startInteractionImmediately(type: .video) {
-            self.navigationController?.pushViewController(vcToPush, animated: true)
+    @IBAction func startInteraction(_ sender: Any) {
+        if (self.vc == nil) {
+            if let vcToPush = TalkativeManager.shared.startInteraction(actionable: "Start Interaction Default Queue") {
+                self.vc = vcToPush
+                self.navigationController?.pushViewController(vcToPush, animated: true)
+            }
+        } else {
+            self.navigationController?.pushViewController(self.vc!, animated: true)
         }
     }
 }
@@ -60,15 +65,29 @@ extension ViewController: TalkativeServerDelegate {
     }
     
     func onInteractionStart() {
-        print("chat can start")
+        print("interaction started")
     }
     
     func onInteractionFinished() {
-        print("chat finished")
+        print("interaction finished")
+        self.navigationController?.popViewController(animated: true)
+        vc = nil;
     }
     
-    func onQosFail(reason: QosFail) {
-        print("Error: \(reason.localizedDescription)")
+    func onQosFail() {
+        print("Qos fail")
+    }
+    
+    func onPresenceFail() {
+        print("Presence fail")
+    }
+    
+    func onCustomEvent(eventName: String) {
+        print(eventName)
+    }
+
+    func onBeforeReady(qos: Qos) -> Bool {
+        return true
     }
 }
 

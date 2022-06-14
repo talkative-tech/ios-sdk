@@ -8,17 +8,20 @@ public protocol TalkativeServerDelegate: AnyObject {
     func onReady()
     /// Handshaked with service interaction started
     func onInteractionStart()
-    /// Queue Availibility problem
-    /// - Parameter reason: The error case like slow connection or noUser
-    func onQosFail(reason: QosFail)
+    func onQosFail()
+    func onPresenceFail()
     /// Interaction finished will soon dismiss the view so you can release VC if you are using!
     func onInteractionFinished()
+    
+    func onCustomEvent(eventName: String)
+    
+    func onBeforeReady(qos: Qos) -> Bool
 }
 
 /// Responsible for holding webview for the interaction process and informing the delegate about changes
 public final class TalkativeViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler, WKNavigationDelegate {
     
-    private var webview: WKWebView?
+    public var webview: WKWebView?
     private var isLoading = true
     private var loadingIndicator = UIActivityIndicatorView(style: .large)
     weak var delegate: TalkativeServerDelegate?
@@ -38,9 +41,9 @@ public final class TalkativeViewController: UIViewController, WKUIDelegate, WKSc
         
         setupViews()
         setupLayout()
-        
-        webview?.customUserAgent = "Mozilla/5.0 (iPad; CPU OS 14_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1"
-        webview?.load(self.prepareChatRequest())
+
+        webview?.customUserAgent = "Mozilla/5.0 (iPad; CPU OS 14_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1 Mobile/15E148 Safari/604.1"
+        webview?.load(self.prepareInteractionRequest())
     }
     
     private func setupViews() {
@@ -96,19 +99,18 @@ public final class TalkativeViewController: UIViewController, WKUIDelegate, WKSc
         self.view.addConstraints(indicatorCons)
     }
     
-    private func prepareChatRequest() -> URLRequest {
+    private func prepareInteractionRequest() -> URLRequest {
         var urlString: String = ""
         urlString += talkativeServerDomain
-        urlString += "?company-uuid="
-        urlString += config.companyId
-        urlString += "&queue-uuid="
-        urlString += config.queueId
-        urlString += "&region="
-        urlString += config.region
-        urlString += "&primary-color="
-        urlString += config.color
-        urlString += "&%3Aapi-features=%5B%27chat%27%2C+%27video%27%5D"
-        urlString += "&" + config.extraUrlParams
+        urlString += "?widget-uuid="
+        urlString += config.widgetUuid
+        urlString += "&url="
+        urlString += config.getUrlFromRegion().addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        urlString += "&widget-path="
+        urlString += config.widgetPath.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        if (config.extraUrlParams != "") {
+            urlString += "&" + config.extraUrlParams
+        }
         
         return URLRequest(url: URL(string: urlString)!)
     }
@@ -118,96 +120,54 @@ public final class TalkativeViewController: UIViewController, WKUIDelegate, WKSc
             return
         }
         
-        if (dict["ready"] != nil) {
-            if (dict["qos"] != nil) {
-                let qosStringData = (dict["qos"] as! String);
-                let jsonData = qosStringData.data(using: .utf8)!
-                let qos = try! JSONDecoder().decode(Qos.self, from: jsonData)
-                
-                if (config.type.rawValue == "chat" && qos.chat == false || config.type.rawValue == "video" && qos.video == false) {
-                    delegate?.onQosFail(reason: .general(qosStringData.debugDescription))
-                } else {
-                    let jsonEncoder = JSONEncoder()
-                    let jsonData = try! jsonEncoder.encode(config.interactionData)
-                    let str = String(data: jsonData, encoding: .utf8)!;
-                    var code = ""
-                    if (config.type.rawValue == "video") {
-                        code = "TalkativeEngageApi.startVideo({interactionData: " + str + ", signedInteractionData: '" + config.signedInteractionData + "'})"
-                    } else {
-                        code = "TalkativeEngageApi.startChat({interactionData: " + str + ", signedInteractionData: '" + config.signedInteractionData + "'})"
-                    }
-                    delegate?.onReady()
-                    self.webview!.evaluateJavaScript(code)
-                }
+        let event = (dict["event"] as! String)
+        
+        if (dict["customEvent"] != nil) {
+            self.delegate?.onCustomEvent(eventName: event)
+            
+            return
+        }
+
+        if (event == "enterStandby") {
+            let qosStringData = (dict["qos"] as! String);
+            let qosJsonData = qosStringData.data(using: .utf8)!
+            let qos = try! JSONDecoder().decode(Qos.self, from: qosJsonData)
+            
+            let beforeReadyBool = self.delegate?.onBeforeReady(qos: qos) ?? true
+            if (!beforeReadyBool) {
+                return
+            }
+            
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try! jsonEncoder.encode(config.interactionData)
+            let interactionDataStringified = String(data: jsonData, encoding: .utf8)!;
+            self.webview!.evaluateJavaScript("window.talkativeApi.interactionData.appendInteractionData(" + interactionDataStringified + ");")
+            if (config.signedInteractionData == "") {
+                self.webview!.evaluateJavaScript("window.talkativeApi.interactionData.setSignedInteractionData('" + config.signedInteractionData + "');")
+            }
+            self.delegate?.onReady()
+            if (config.actionable != nil) {
+                self.webview!.evaluateJavaScript("window.talkativeApi.actions.triggerAction('" + config.actionable! + "');")
             }
         }
         
-        if (dict["started"] != nil) {
-            delegate?.onInteractionStart()
+        if (event == "qosFail") {
+            self.delegate?.onQosFail()
         }
         
-        //This code triggers when the user is done with the chat (after feedback)
-        if (dict["final"] != nil) {
-            dismiss()
+        if (event == "presenceFail") {
+            self.delegate?.onPresenceFail()
+        }
+        
+        if (event == "enterInteraction") {
+            self.delegate?.onInteractionStart()
+        }
+        
+        if (event == "completeInteraction") {
+            self.delegate?.onInteractionFinished()
         }
     }
-    
-    private func dismiss() {
-        self.delegate?.onInteractionFinished()
-        self.dismiss(animated: true)
-    }
-    
-    public func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo,
-                 completionHandler: @escaping () -> Void) {
 
-        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            completionHandler()
-        }))
-
-        present(alertController, animated: true, completion: nil)
-    }
-
-    public func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo,
-                 completionHandler: @escaping (Bool) -> Void) {
-
-        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            completionHandler(true)
-        }))
-
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
-            completionHandler(false)
-        }))
-
-        present(alertController, animated: true, completion: nil)
-    }
-
-    public func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo,
-                 completionHandler: @escaping (String?) -> Void) {
-
-        let alertController = UIAlertController(title: nil, message: prompt, preferredStyle: .alert)
-
-        alertController.addTextField { (textField) in
-            textField.text = defaultText
-        }
-
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            if let text = alertController.textFields?.first?.text {
-                completionHandler(text)
-            } else {
-                completionHandler(defaultText)
-            }
-        }))
-
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
-            completionHandler(nil)
-        }))
-
-        present(alertController, animated: true, completion: nil)
-    }
-    
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         guard let url = navigationAction.request.url else {
             decisionHandler(.allow)
@@ -228,6 +188,14 @@ public final class TalkativeViewController: UIViewController, WKUIDelegate, WKSc
     public func webView(_ webView: WKWebView, requestMediaCapturePermissionFor origin: WKSecurityOrigin, initiatedByFrame frame: WKFrameInfo, type: WKMediaCaptureType, decisionHandler: @escaping (WKPermissionDecision) -> Void) {
 
         decisionHandler(.grant)
+    }
+    
+    public func runApiFunction(code: String) {
+        self.webview!.evaluateJavaScript("window.talkativeApi." + code)
+    }
+    
+    public func endInteraction() {
+        self.webview!.evaluateJavaScript("window.talkativeApi.__unsafe.endInteraction()")
     }
 }
 

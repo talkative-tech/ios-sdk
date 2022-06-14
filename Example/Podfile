@@ -1,12 +1,9 @@
 use_frameworks!
 
-platform :ios, '14.3'
+platform :ios, '14.5'
 
 target 'Talkative_Example' do
   pod 'Talkative', :path => '../'
-
-  target 'Talkative_Tests' do
-    inherit! :search_paths
 
     
   end
